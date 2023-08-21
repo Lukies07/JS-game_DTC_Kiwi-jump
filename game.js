@@ -10,11 +10,14 @@ const playerWidth = 50;
 const playerHeight = 50;
 //keep player inside the canvas
 let playerX = canvas.width / 2 - playerWidth / 2;
-const playerY = canvas.height - playerHeight - 10;
 const playerSpeed = 5;
+const gravity = 0.1;
+const jumpStrength = -10; // Negative value for upward movement
+const groundHeight = 300; // Adjust this to match your game's ground level
 
-//variables for jumping
-let isJumping = false
+let playerY = groundHeight;
+let jump = false;
+let velocityY = 0;
 // Arrow key state
 let leftPressed = false;
 let rightPressed = false;
@@ -29,11 +32,12 @@ function keyDownHandler(event) {
     //arrow key listners
     if (event.key === "Left" || event.key === "ArrowLeft") {
         leftPressed = true;
-    } else if (event.key === "Right" || event.key === "ArrowRight") {
+    } if (event.key === "Right" || event.key === "ArrowRight") {
         rightPressed = true;
-    }   else if (event.key === "Up" || event.key === "ArrowUp"){
-        upPressed = true
-    }
+    }    if (event.key === "ArrowUp" && !jump) {
+        jump = true;
+        velocityY = jumpStrength;
+      }
     
 }
 
@@ -41,11 +45,11 @@ function keyUpHandler(event) {
     if (event.key === "Left" || event.key === "ArrowLeft") {
         leftPressed = false;
     } 
-        else if (event.key === "Right" || event.key === "ArrowRight") {
+        if (event.key === "Right" || event.key === "ArrowRight") {
         rightPressed = false;
     }
-        else if (event.key === "Up" || event.key === "ArrowUp") {
-        UpPressed = false;
+        if (event.key === "Up" || event.key === "ArrowUp") {
+        upPressed = false;
     }
 
 }
@@ -58,10 +62,32 @@ function updatePlayerPosition() {
     if (rightPressed && playerX < canvas.width - playerWidth) {
         playerX += playerSpeed;
     }
-    if (upPressed && isJumping) {
-        playerY + 10;
+    if (upPressed && playerY > 0) {
+        playerY -= 2;
+        playerY -= 5;
+        playerY -= 10;
+        playerY -= 12;
+        playerY -= 10;
     }
 }
+
+function update() {
+    // Apply gravity to the player's vertical velocity
+    velocityY += gravity;
+    
+    // Update player's Y position based on velocity
+    playerY += velocityY;
+    
+    // Check if the player has hit the ground
+    if (playerY >= groundHeight) {
+      playerY = groundHeight;
+      velocityY = 0;
+      jump = false;
+    }
+    
+    // Update player's position on the screen
+    // Here you might update the player's position in your game's rendering system
+  }
 
 // Game loop
 function gameLoop() {
@@ -72,7 +98,7 @@ function gameLoop() {
     // Draw player
     ctx.fillStyle = "blue";
     ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
-
+    update();
     requestAnimationFrame(gameLoop);
 }
 
