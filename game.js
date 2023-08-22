@@ -5,19 +5,29 @@ const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 600;
 
+//branch genreation
+let branchXpos = 0;
+let branchYpos = 400;
+let brachXwidth = 100;
+let branchYwidth = 20;
+
+
 // Player properties
 const playerWidth = 50;
 const playerHeight = 50;
+
 //keep player inside the canvas
 let playerX = canvas.width / 2 - playerWidth / 2;
 const playerSpeed = 5;
-const gravity = 0.1;
-const jumpStrength = -10; // Negative value for upward movement
-const groundHeight = 300; // Adjust this to match your game's ground level
+const gravity =0.75;
+const jumpStrength = -20; // I have Negative value for upward movement
+let groundHeight = 550;
 
+//player jump stats
 let playerY = groundHeight;
 let jump = false;
 let velocityY = 0;
+
 // Arrow key state
 let leftPressed = false;
 let rightPressed = false;
@@ -54,6 +64,7 @@ function keyUpHandler(event) {
 
 }
 
+
 // Update player position
 function updatePlayerPosition() {
     if (leftPressed && playerX > 0) {
@@ -62,13 +73,7 @@ function updatePlayerPosition() {
     if (rightPressed && playerX < canvas.width - playerWidth) {
         playerX += playerSpeed;
     }
-    if (upPressed && playerY > 0) {
-        playerY -= 2;
-        playerY -= 5;
-        playerY -= 10;
-        playerY -= 12;
-        playerY -= 10;
-    }
+   
 }
 
 function update() {
@@ -92,13 +97,17 @@ function update() {
 // Game loop
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+   
+    updatePlayerPosition();//runs the function to update player 
 
-    updatePlayerPosition();
+    //make sticks for player to jump on
+    ctx.fillStyle = "black";
+    ctx.fillRect(branchXpos, branchYpos,brachXwidth, branchYwidth);
 
     // Draw player
     ctx.fillStyle = "blue";
     ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
-    update();
+    update(); //for the jumping
     requestAnimationFrame(gameLoop);
 }
 
