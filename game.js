@@ -19,7 +19,7 @@ const playerHeight = 50;
 //keep player inside the canvas
 let playerX = canvas.width / 2 - playerWidth / 2;
 const playerSpeed = 5;
-const gravity =0.75;
+const gravity = 0.75;
 const jumpStrength = -20; // I have Negative value for upward movement
 let groundHeight = 550;
 
@@ -32,6 +32,11 @@ let velocityY = 0;
 let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
+//c stands for colour
+const black = pixelData[0];
+const pixelData = ctx.getImageData(playerX + playerWidth, playerY + playerHeight, 1, 1).data; //get data for edges around player
+console.log(`Color at (${cubeX + relativeX}, ${cubeY + relativeY}): B=${cBlack}`);
+    
 
 // Event listeners for arrow key presses
 document.addEventListener("keydown", keyDownHandler);
@@ -73,9 +78,42 @@ function updatePlayerPosition() {
     if (rightPressed && playerX < canvas.width - playerWidth) {
         playerX += playerSpeed;
     }
-   
+    
+    
 }
 
+function checkPlayerBranchCollision() {
+    const leftFootPixelColor = ctx.getImageData(playerX, playerY + playerHeight, 1, 1).data;
+    const rightFootPixelColor = ctx.getImageData(playerX + playerWidth, playerY + playerHeight, 1, 1).data;
+    
+    // Check if the player's feet hit the branch's color (assuming black is the branch color)
+    if (
+      (leftFootPixelColor[0] === 0 && leftFootPixelColor[1] === 0 && leftFootPixelColor[2] === 0) ||
+      (rightFootPixelColor[0] === 0 && rightFootPixelColor[1] === 0 && rightFootPixelColor[2] === 0)
+    ) {
+      // Handle collision with branch (e.g., stop player's vertical movement)
+      velocityY = 0; // Stop player's vertical movement
+      playerY = branchYpos - playerHeight; // Move player above the branch
+      jump = false; // Allow player to jump again
+    }
+  }
+  
+  // Update function
+  function update() {
+    velocityY += gravity;
+    playerY += velocityY;
+  
+    if (playerY >= groundHeight) {
+      playerY = groundHeight;
+      velocityY = 0;
+      jump = false;
+    }
+  
+    // Check for collisions with branch
+    checkPlayerBranchCollision();
+  }
+
+  
 function update() {
     // Apply gravity to the player's vertical velocity
     velocityY += gravity;
