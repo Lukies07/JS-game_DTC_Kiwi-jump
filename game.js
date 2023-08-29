@@ -1,3 +1,5 @@
+import { platforms } from './levelgen.js'; 
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -18,19 +20,6 @@ let player = {
   isMovingLeft: false, 
   isMovingRight: false,
 };
-//chat gpt helped me with making multiple platforms took 3 hours to understand everything
-let platforms = [
-  { x: 150, y: canvas.height - 20, width: 100, height: 20 },
-  { x: 400, y: canvas.height - 350, width: 100, height: 20 },
-  { x: 600, y: canvas.height - 400, width: 100, height: 20 },
-  { x: 500, y: canvas.height - 200, width: 100, height: 20 },
-  { x: 498, y: canvas.height - 20, width: 100, height: 20 },
-  { x: 983, y: canvas.height - 350, width: 100, height: 20 },
-  { x: 263, y: canvas.height - 300, width: 100, height: 20 },
-  { x: 50, y: canvas.height - 600, width: 100, height: 20 },
-  { x: 100, y: canvas.height - 530, width: 100, height: 20 },
-];
-
 
 // chat gpt helped with this 
 function isColliding(rect1, rect2) {
@@ -121,7 +110,6 @@ function draw() {
 function gameLoop() {
   update(); // Update player position
   draw(); // Draw the updated scene
-
   requestAnimationFrame(gameLoop); // Call gameLoop again for the next frame
 }
 // Start the game loop
