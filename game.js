@@ -1,5 +1,5 @@
-import { platforms } from './levelgen.js'; 
-
+import {platforms} from './levelgen.js';
+console.log (platforms);
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -22,6 +22,7 @@ let player = {
 };
 
 // chat gpt helped with this 
+
 function isColliding(rect1, rect2) {
   return (
     rect1.x < rect2.x + rect2.width &&
