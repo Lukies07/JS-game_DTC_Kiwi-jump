@@ -22,8 +22,23 @@ let player = {
 
 // chat gpt helped with this 
 let platforms = [
-  { x: 150, y: canvas.height - 20, width: 200, height: 10 },
-  { x: 400, y: canvas.height - 50, width: 150, height: 10 }
+  { x: 150, y: canvas.height - 20, width: 100, height: 20 },
+  { x: 400, y: canvas.height - 50, width: 100, height: 20 },
+  { x: 250, y: canvas.height - 600, width: 100, height: 20 },
+  { x: 400, y: canvas.height - 120, width: 100, height: 20 },
+  { x: 800, y: canvas.height - 200, width: 100, height: 20 },
+  { x: 1000, y: canvas.height - 600, width: 100, height: 20 },
+  { x: 900, y: canvas.height - 290, width: 100, height: 20 },
+  { x: 300, y: canvas.height - 290, width: 100, height: 20 },
+  { x: 600, y: canvas.height - 400, width: 100, height: 20 },
+  { x: 800, y: canvas.height - 300, width: 100, height: 20 },
+  { x: 750, y: canvas.height - 690, width: 100, height: 20 },
+  { x: 400, y: canvas.height - 500, width: 100, height: 20 },
+  { x: 650, y: canvas.height - 540, width: 100, height: 20 },
+  { x: 400, y: canvas.height - 6500, width: 100, height: 20 },
+  { x: 0, y: canvas.height - 300, width: 100, height: 20 },
+  { x: 200, y: canvas.height - 330, width: 100, height: 20 },
+  { x: 350, y: canvas.height - 250, width: 100, height: 20 }
 ];
 
 
@@ -44,14 +59,21 @@ player.y = canvas.height - player.height;
 document.addEventListener("keydown", function(event) {
   if (event.key === 'd') {
     player.isMovingRight = true; // Start moving the player to the right
+    console.log(player.x)
+    console.log(player.y)
+
   }
   if (event.key === 'a') {
     player.isMovingLeft = true; // Start moving the player to the left
+    console.log(player.x)
+    console.log(player.y)
   }
   if (event.key === 'w') {
     if (!player.isJumping) {
       player.velocityY = -player.jumpForce; // Apply jump force
       player.isJumping = true;
+      console.log(player.x)
+      console.log(player.y)
     }
   }
 });
