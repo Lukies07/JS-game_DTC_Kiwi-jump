@@ -1,5 +1,4 @@
-
-const canvas = document.getElementById("gameCanvas");
+const canvas = document.getElementById("MainMenu");
 const ctx = canvas.getContext("2d");
 
 // Set canvas dimensions
@@ -21,26 +20,6 @@ let player = {
 };
 
 // chat gpt helped with this 
-let platforms = [
-  { x: 150, y: canvas.height - 20, width: 100, height: 20 },
-  { x: 400, y: canvas.height - 50, width: 100, height: 20 },
-  { x: 250, y: canvas.height - 600, width: 100, height: 20 },
-  { x: 400, y: canvas.height - 120, width: 100, height: 20 },
-  { x: 800, y: canvas.height - 200, width: 100, height: 20 },
-  { x: 1000, y: canvas.height - 600, width: 100, height: 20 },
-  { x: 900, y: canvas.height - 290, width: 100, height: 20 },
-  { x: 300, y: canvas.height - 290, width: 100, height: 20 },
-  { x: 600, y: canvas.height - 400, width: 100, height: 20 },
-  { x: 800, y: canvas.height - 300, width: 100, height: 20 },
-  { x: 750, y: canvas.height - 690, width: 100, height: 20 },
-  { x: 400, y: canvas.height - 500, width: 100, height: 20 },
-  { x: 650, y: canvas.height - 540, width: 100, height: 20 },
-  { x: 400, y: canvas.height - 6500, width: 100, height: 20 },
-  { x: 0, y: canvas.height - 300, width: 100, height: 20 },
-  { x: 200, y: canvas.height - 330, width: 100, height: 20 },
-  { x: 350, y: canvas.height - 250, width: 100, height: 20 }
-];
-
 
 function isColliding(rect1, rect2) {
   return (
