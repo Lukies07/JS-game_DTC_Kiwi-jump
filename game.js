@@ -30,6 +30,11 @@ function isColliding(rect1, rect2) {
   );
 }
 
+let platforms = [
+  { x: 150, y: canvas.height - 20, width: 200, height: 10 },
+  { x: 400, y: canvas.height - 50, width: 150, height: 10 }
+];
+
 //set player pos(it is done here because technical reasons that take a lot of words to explain :)
 player.x = canvas.width/2;
 player.y = canvas.height - player.height;

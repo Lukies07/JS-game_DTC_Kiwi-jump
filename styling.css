@@ -7,10 +7,6 @@ body {
     background-color: lightgreen;
 }
 
-.MainMenu {
+Canvas {
     border: 10px solid black;
-}
-.Levels .level1{
-   height: 200px;
-   width: 200px;
 }
