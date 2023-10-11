@@ -1,9 +1,12 @@
-const canvas = document.getElementById("MainMenu");
+const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 // Set canvas dimensions
 canvas.width = 1080;
 canvas.height = 720;
+
+//if it is 0 it means it is on homepage and if it is on 1<above then it is a level 
+let level = 1;
 
 //declare player porperties
 let player = {
@@ -19,8 +22,13 @@ let player = {
   isMovingRight: false,
 };
 
-// chat gpt helped with this 
+let platformsLvlOne = [
+  { x: 150, y: canvas.height - 20, width: 200, height: 10 },
+  { x: 400, y: canvas.height - 50, width: 150, height: 10 }
+];
 
+
+// chat gpt helped with this:
 function isColliding(rect1, rect2) {
   return (
     rect1.x < rect2.x + rect2.width &&
@@ -30,10 +38,16 @@ function isColliding(rect1, rect2) {
   );
 }
 
-let platforms = [
-  { x: 150, y: canvas.height - 20, width: 200, height: 10 },
-  { x: 400, y: canvas.height - 50, width: 150, height: 10 }
-];
+
+if (level === 1)  function drawPlatforms() {
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  for (let platform of platformsLvlOne) {
+    ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+  }
+}
+
 
 //set player pos(it is done here because technical reasons that take a lot of words to explain :)
 player.x = canvas.width/2;
@@ -61,6 +75,7 @@ document.addEventListener("keydown", function(event) {
     }
   }
 });
+
 
 document.addEventListener("keyup", function(event) {
   if (event.key === 'd') {
@@ -93,7 +108,7 @@ function update() {
     player.isJumping = false;
   }
   //chat gpt did this, but after analyising code i understand it
-  for (let platform of platforms) {
+  for (let platform of platformsLvlOne) { //getting the location of the platforms to make the player colide with them
     if (isColliding(player, platform) && player.velocityY > 0) {
       player.y = platform.y - player.height;
       player.velocityY = 0;
@@ -102,26 +117,19 @@ function update() {
   }
 }
 
-// Function to clear the canvas and draw the player
-function draw() {
-  // Clear the canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Set player color
-  ctx.fillStyle = "blue";
-  ctx.fillRect(player.x, player.y, player.width, player.height);
-
-  ctx.fillStyle = "black";
-  for (let platform of platforms) {
-    ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-  }
+function drawPlayer() {
+// Set player color
+ctx.fillStyle = "blue";
+ctx.fillRect(player.x, player.y, player.width, player.height);
+ctx.fillStyle = "black";
 }
-
 // Game loop
 function gameLoop() {
   update(); // Update player position
-  draw(); // Draw the updated scene
+  drawPlatforms(); // Draw the updated scene
   requestAnimationFrame(gameLoop); // Call gameLoop again for the next frame
+  drawPlayer()
 }
 // Start the game loop
 gameLoop();
