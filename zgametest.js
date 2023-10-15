@@ -8,7 +8,7 @@ let level = 0;
 
 let player = {
   x: undefined,
-  y: undefined,
+  y: undefined, 
   width: 40,
   height: 40,
   speed: 5,
@@ -53,30 +53,26 @@ function drawPlatforms() {
     ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
   }
 }
-
 function startGame() {
   console.log("Game started!");
   level = 1;
   checkCondition();
-
-  if (level === 1) {
-    drawPlatforms(); // Draw the platforms
-    drawPlayer(); // Draw the player
-    requestAnimationFrame(gameLoop);
-  }
+  drawPlatforms(); // Draw the platforms
+  drawPlayer(); // Draw the player
+  requestAnimationFrame(gameLoop);
 }
+
 
 player.x = canvas.width / 2;
 player.y = canvas.height - player.height;
 
 document.addEventListener("keydown", function (event) {
   if (event.key === "d") {
-    player.isMovingRight = true; // Start moving the player to the right
-  }
-  if (event.key === "a") {
+    player.isMovingRight = true;
+    console.log(player.x) // Start moving the player to the right
+  } else if (event.key === "a") {
     player.isMovingLeft = true; // Start moving the player to the left
-  }
-  if (event.key === "w") {
+  } else if (event.key === "w") {
     if (!player.isJumping) {
       player.velocityY = -player.jumpForce; // Apply jump force
       player.isJumping = true;
@@ -87,8 +83,7 @@ document.addEventListener("keydown", function (event) {
 document.addEventListener("keyup", function (event) {
   if (event.key === "d") {
     player.isMovingRight = false; // Stop moving the player
-  }
-  if (event.key === "a") {
+  } else if (event.key === "a") {
     player.isMovingLeft = false; // Stop moving the player
   }
 });
@@ -128,12 +123,12 @@ function drawPlayer() {
 }
 
 function gameLoop() {
-  loadGameObjects();
   update();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawPlatforms();
-  requestAnimationFrame(gameLoop);
   drawPlayer();
+  requestAnimationFrame(gameLoop);
+  
 }
-
 checkCondition();
 gameLoop();
