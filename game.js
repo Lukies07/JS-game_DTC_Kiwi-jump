@@ -9,15 +9,35 @@ let level = 0;
 let player = {
   x: undefined,
   y: undefined,
-  width: 40,
-  height: 40,
+  width: 25,
+  height: 25,
   speed: 5,
-  jumpForce: 12,
+  jumpForce: 11,
   velocityY: 0,
   isJumping: false,
   isMovingLeft: false,
   isMovingRight: false,
 };
+
+
+let platformsLvlOne = [
+  { x: 150, y: canvas.height - 200, width: 200, height: 200 },
+  { x: 400, y: canvas.height - 50, width: 150, height: 10 },
+];
+
+
+function drawPlayer() {
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(player.x, player.y, player.width, player.height);
+}
+
+function drawPlatforms() {
+  ctx.fillStyle = 'black';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let platform of platformsLvlOne) {
+    ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+  }
+}
 
 function startGame() {
     console.log("Game started!");
@@ -47,18 +67,6 @@ function checkCondition() {
 player.x = canvas.width/2;
 player.y = canvas.height - player.height;
 
-let platformsLvlOne = [
-  { x: 150, y: canvas.height - 200, width: 200, height: 200 },
-  { x: 400, y: canvas.height - 50, width: 150, height: 10 },
-];
-
-function drawPlatforms() {
-    ctx.fillStyle = 'black';
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let platform of platformsLvlOne) {
-      ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-    }
-  }
 
 document.addEventListener("keydown", function (event) {
     if (event.key === "d") {
@@ -91,38 +99,39 @@ function isColliding(rect1, rect2) {
 }
 
 
-function playerUpdate() {   
-    if (player.isMovingRight && player.x < canvas.width - player.width) {
-        player.x += player.speed;
-      }
-    
-      if (player.isMovingLeft && player.x > 0) {
-        player.x -= player.speed;
-      }
-    
-      const gravity = 0.4;
-      player.velocityY += gravity;
-    
-      player.y += player.velocityY;
-    
-      if (player.y >= canvas.height - player.height) {
-        player.y = canvas.height - player.height;
-        player.isJumping = false;
-      }
-    
-      for (let platform of platformsLvlOne) {
-        if (isColliding(player, platform) && player.velocityY > 0) {
-          player.y = platform.y - player.height;
-          player.velocityY = 0;
-          player.isJumping = false;
-        }
-      }
+function playerUpdate() {
+  // Handle horizontal movement
+  if (player.isMovingRight && player.x < canvas.width - player.width) {
+    // Check for collisions with platforms in the x-direction
+    let nextX = player.x + player.speed;
+    let hasCollision = platformsLvlOne.some(platform => isColliding({ x: nextX, y: player.y, width: player.width, height: player.height }, platform));
+
+    if (!hasCollision) {
+      player.x = nextX;
     }
+  }
 
+  if (player.isMovingLeft && player.x > 0) {
+    // Check for collisions with platforms in the x-direction
+    let nextX = player.x - player.speed;
+    let hasCollision = platformsLvlOne.some(platform => isColliding({ x: nextX, y: player.y, width: player.width, height: player.height }, platform));
 
-function drawPlayer() {
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(player.x, player.y, player.width, player.height);
+    if (!hasCollision) {
+      player.x = nextX;
+    }
+  }
+
+  // Handle vertical movement
+  const gravity = 0.5;
+  player.velocityY += gravity;
+  player.y += player.velocityY;
+
+  // Check for ground collision
+  if (player.y >= canvas.height - player.height) {
+    player.y = canvas.height - player.height;
+    player.isJumping = false;
+    player.velocityY = 0;
+  }
 }
 
 
