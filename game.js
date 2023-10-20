@@ -21,8 +21,20 @@ let player = {
 
 
 let platformsLvlOne = [
-  { x: 150, y: canvas.height - 200, width: 200, height: 200 },
-  { x: 400, y: canvas.height - 50, width: 150, height: 10 },
+  { x: 100, y: canvas.height - 50, width: 100, height: 20},
+  { x: 200, y: canvas.height - 600, width: 100, height: 20},
+  { x: 300, y: canvas.height - 750, width: 100, height: 20},
+  { x: 400, y: canvas.height - 250, width: 100, height: 20},
+  { x: 600, y: canvas.height - 100, width: 100, height: 20},
+  { x: 700, y: canvas.height - 200, width: 100, height: 20},
+  { x: 800, y: canvas.height - 300, width: 100, height: 20},
+  { x: 900, y: canvas.height - 500, width: 100, height: 20},
+  { x: 1000, y: canvas.height - 700, width: 100, height: 20},
+  { x: 1100, y: canvas.height - 450, width: 100, height: 20},
+  { x: 100, y: canvas.height - 350, width: 100, height: 20},
+  { x: 300, y: canvas.height - 400, width: 100, height: 20},
+  { x: 500, y: canvas.height - 650, width: 100, height: 20},
+  { x: 700, y: canvas.height - 800, width: 100, height: 20},
 ];
 
 
@@ -100,12 +112,31 @@ function isColliding(rect1, rect2) {
 
 
 function playerUpdate() {
+
+  for (let platform of platformsLvlOne) {
+    if (isColliding(player, platform) && player.velocityY > 0) {
+      player.y = platform.y - player.height;
+      player.velocityY = 0;
+      player.isJumping = false;
+    }
+  }
+
+  const gravity = 0.5;
+  player.velocityY += gravity;
+  player.y += player.velocityY;
+
+  if (player.y >= canvas.height - player.height) {
+    player.y = canvas.height - player.height;
+    player.isJumping = false;
+    player.velocityY = 0;
+  }
+
   // Handle horizontal movement
   if (player.isMovingRight && player.x < canvas.width - player.width) {
     // Check for collisions with platforms in the x-direction
     let nextX = player.x + player.speed;
     let hasCollision = platformsLvlOne.some(platform => isColliding({ x: nextX, y: player.y, width: player.width, height: player.height }, platform));
-
+      
     if (!hasCollision) {
       player.x = nextX;
     }
@@ -121,19 +152,7 @@ function playerUpdate() {
     }
   }
 
-  // Handle vertical movement
-  const gravity = 0.5;
-  player.velocityY += gravity;
-  player.y += player.velocityY;
-
-  // Check for ground collision
-  if (player.y >= canvas.height - player.height) {
-    player.y = canvas.height - player.height;
-    player.isJumping = false;
-    player.velocityY = 0;
-  }
 }
-
 
 function gameLoop() {
     if (level == 1) {
