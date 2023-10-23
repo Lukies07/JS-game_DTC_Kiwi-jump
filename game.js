@@ -21,11 +21,13 @@ let player = {
 
 
 let platformsLvlOne = [
+  { x: 150, y: canvas.height - 200, width: 200, height: 200 },
+  { x: 400, y: canvas.height - 50, width: 150, height: 10 },
   { x: 100, y: canvas.height - 50, width: 100, height: 20},
   { x: 200, y: canvas.height - 600, width: 100, height: 20},
   { x: 300, y: canvas.height - 750, width: 100, height: 20},
   { x: 400, y: canvas.height - 250, width: 100, height: 20},
-  { x: 600, y: canvas.height - 100, width: 100, height: 20},
+  { x: 600, y: canvas.height - 100, width: 100, height: 20},  
   { x: 700, y: canvas.height - 200, width: 100, height: 20},
   { x: 800, y: canvas.height - 300, width: 100, height: 20},
   { x: 900, y: canvas.height - 500, width: 100, height: 20},
@@ -38,10 +40,16 @@ let platformsLvlOne = [
 ];
 
 
+player.x = canvas.width/2;
+player.y = canvas.height - player.height;
+
+
 function drawPlayer() {
   ctx.fillStyle = 'blue';
   ctx.fillRect(player.x, player.y, player.width, player.height);
+  console.log(player.y)
 }
+
 
 function drawPlatforms() {
   ctx.fillStyle = 'black';
@@ -50,6 +58,7 @@ function drawPlatforms() {
     ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
   }
 }
+
 
 function startGame() {
     console.log("Game started!");
@@ -71,58 +80,85 @@ function checkCondition() {
     }
   }
 
+
   function MainMenu() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-//determan player pos
-player.x = canvas.width/2;
-player.y = canvas.height - player.height;
 
+let keys = {};
 
 document.addEventListener("keydown", function (event) {
-    if (event.key === "d") {
-      player.isMovingRight = true; // Start moving the player to the right
-    } else if (event.key === "a") {
-      player.isMovingLeft = true; // Start moving the player to the left
-    } else if (event.key === "w") {
-      if (!player.isJumping) {
-        player.velocityY = -player.jumpForce; // Apply jump force
-        player.isJumping = true;
-      }
-    }
-  });
-  
-  document.addEventListener("keyup", function (event) {
-    if (event.key === "d") {
-      player.isMovingRight = false; // Stop moving the player
-    } else if (event.key === "a") {
-      player.isMovingLeft = false; // Stop moving the player
-    }
-  });
+    keys[event.key] = true;
+});
 
-function isColliding(rect1, rect2) {
+document.addEventListener("keyup", function (event) {
+    keys[event.key] = false;
+});
+
+function handleKeys() {
+
+    if (keys["d"]) {
+      player.isMovingRight = true;
+      console.log(player.x)
+    } else {
+        player.isMovingRight = false;
+    }
+
+    if (keys["a"]) {
+        player.isMovingLeft = true;
+        console.log(player.x)
+    } else {
+        player.isMovingLeft = false;
+    }
+
+    if (keys["w"] && !player.isJumping) {
+        player.velocityY = -player.jumpForce;
+        player.isJumping = true;
+    }
+}
+
+function playerCollision(player, platform) {
   return (
-    rect1.x < rect2.x + rect2.width &&
-    rect1.x + rect1.width > rect2.x &&
-    rect1.y < rect2.y + rect2.height &&
-    rect1.y + rect1.height > rect2.y
+    player.x < platform.x + platform.width &&
+    player.x + player.width > platform.x &&
+    player.y < platform.y + platform.height &&
+    player.y + player.height > platform.y
   );
 }
 
+function handleCollisions() {
+  for (let i = 0; i < platformsLvlOne.length; i++) {
+    if (playerCollision(player, platformsLvlOne[i])) {
+      // Collision detected, handle it here
+      const fromTop = player.y + player.height - platformsLvlOne[i].y;
+      const fromBottom = platformsLvlOne[i].y + platformsLvlOne[i].height - player.y;
 
-function playerUpdate() {
-
-  for (let platform of platformsLvlOne) {
-    if (isColliding(player, platform) && player.velocityY > 0) {
-      player.y = platform.y - player.height;
-      player.velocityY = 0;
-      player.isJumping = false;
+      if (fromTop < fromBottom) {
+        // Collision from the top, move the player back down
+        player.y = platformsLvlOne[i].y - player.height;
+        player.isJumping = false;
+        player.velocityY = 0;
+      } else {
+        // Collision from the bottom, move the player back up
+        player.y = platformsLvlOne[i].y + platformsLvlOne[i].height;
+        player.velocityY = 0;
+      }
     }
   }
+}
 
+function playerUpdate() {
   const gravity = 0.5;
-  player.velocityY += gravity;
+
+  if (!player.isJumping) {
+    // Apply a smaller gravity when the player is gliding off a platform
+    player.velocityY += gravity;
+  } else {
+    // Apply regular gravity when jumping
+    player.velocityY += gravity;
+  }
+
   player.y += player.velocityY;
 
   if (player.y >= canvas.height - player.height) {
@@ -131,38 +167,26 @@ function playerUpdate() {
     player.velocityY = 0;
   }
 
-  // Handle horizontal movement
-  if (player.isMovingRight && player.x < canvas.width - player.width) {
-    // Check for collisions with platforms in the x-direction
-    let nextX = player.x + player.speed;
-    let hasCollision = platformsLvlOne.some(platform => isColliding({ x: nextX, y: player.y, width: player.width, height: player.height }, platform));
-      
-    if (!hasCollision) {
-      player.x = nextX;
-    }
+  handleKeys();
+
+  if (player.isMovingRight && player.x + player.width < canvas.width) {
+    player.x += player.speed;
   }
 
   if (player.isMovingLeft && player.x > 0) {
-    // Check for collisions with platforms in the x-direction
-    let nextX = player.x - player.speed;
-    let hasCollision = platformsLvlOne.some(platform => isColliding({ x: nextX, y: player.y, width: player.width, height: player.height }, platform));
-
-    if (!hasCollision) {
-      player.x = nextX;
-    }
+    player.x -= player.speed;
   }
-
 }
-
 function gameLoop() {
     if (level == 1) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawPlatforms();
     drawPlayer();
+    handleKeys(); 
     playerUpdate();
+    handleCollisions(); 
     requestAnimationFrame(gameLoop);
     }
-   
 }
 checkCondition();
 gameLoop();
