@@ -11,7 +11,7 @@ let player = {
   y: undefined,
   width: 25,
   height: 25,
-  speed: 5,
+  speed: 4,
   jumpForce: 11,
   velocityY: 0,
   isJumping: false,
@@ -20,13 +20,13 @@ let player = {
 };
 
 
-let platformsLvlOne = [
+let platformsLvlOne = [ 
   { x: 150, y: canvas.height - 200, width: 200, height: 200 },
   { x: 400, y: canvas.height - 50, width: 150, height: 10 },
   { x: 100, y: canvas.height - 50, width: 100, height: 20},
   { x: 200, y: canvas.height - 600, width: 100, height: 20},
   { x: 300, y: canvas.height - 750, width: 100, height: 20},
-  { x: 400, y: canvas.height - 250, width: 100, height: 20},
+  { x: 450, y: canvas.height - 250, width: 100, height: 20},
   { x: 600, y: canvas.height - 100, width: 100, height: 20},  
   { x: 700, y: canvas.height - 200, width: 100, height: 20},
   { x: 800, y: canvas.height - 300, width: 100, height: 20},
@@ -47,7 +47,6 @@ player.y = canvas.height - player.height;
 function drawPlayer() {
   ctx.fillStyle = 'blue';
   ctx.fillRect(player.x, player.y, player.width, player.height);
-  console.log(player.y)
 }
 
 
@@ -100,14 +99,12 @@ function handleKeys() {
 
     if (keys["d"]) {
       player.isMovingRight = true;
-      console.log(player.x)
     } else {
         player.isMovingRight = false;
     }
 
     if (keys["a"]) {
         player.isMovingLeft = true;
-        console.log(player.x)
     } else {
         player.isMovingLeft = false;
     }
@@ -127,22 +124,30 @@ function playerCollision(player, platform) {
   );
 }
 
+//chat gpt helped with the math for this function
 function handleCollisions() {
-  for (let i = 0; i < platformsLvlOne.length; i++) {
-    if (playerCollision(player, platformsLvlOne[i])) {
-      // Collision detected, handle it here
-      const fromTop = player.y + player.height - platformsLvlOne[i].y;
-      const fromBottom = platformsLvlOne[i].y + platformsLvlOne[i].height - player.y;
+  for (let platform of platformsLvlOne) {
+    if (playerCollision(player, platform)) {
+      const fromTop = player.y + player.height - platform.y;
+      const fromBottom = platform.y + platform.height - player.y;
+      const fromLeft = player.x + player.width - platform.x;
+      const fromRight = platform.x + platform.width - player.x;
 
-      if (fromTop < fromBottom) {
+      if (fromTop < fromBottom && fromTop < fromLeft && fromTop < fromRight) {
         // Collision from the top, move the player back down
-        player.y = platformsLvlOne[i].y - player.height;
+        player.y = platform.y - player.height;
         player.isJumping = false;
         player.velocityY = 0;
-      } else {
+      } else if (fromBottom < fromTop && fromBottom < fromLeft && fromBottom < fromRight) {
         // Collision from the bottom, move the player back up
-        player.y = platformsLvlOne[i].y + platformsLvlOne[i].height;
+        player.y = platform.y + platform.height;
         player.velocityY = 0;
+      } else if (fromLeft < fromTop && fromLeft < fromBottom && fromLeft < fromRight) {
+        // Collision from the left, move the player back to the right
+        player.x = platform.x - player.width;
+      } else if (fromRight < fromTop && fromRight < fromBottom && fromRight < fromLeft) {
+        // Collision from the right, move the player back to the left
+        player.x = platform.x + platform.width;
       }
     }
   }
