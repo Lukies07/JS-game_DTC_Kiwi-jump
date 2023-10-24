@@ -27,7 +27,7 @@ let platformsLvlOne = [
   { x: 200, y: canvas.height - 600, width: 100, height: 20},
   { x: 300, y: canvas.height - 750, width: 100, height: 20},
   { x: 450, y: canvas.height - 250, width: 100, height: 20},
-  { x: 600, y: canvas.height - 100, width: 100, height: 20},  
+  { x: 600, y: canvas.height - 100, width: 100, height: 20},
   { x: 700, y: canvas.height - 200, width: 100, height: 20},
   { x: 800, y: canvas.height - 300, width: 100, height: 20},
   { x: 900, y: canvas.height - 500, width: 100, height: 20},
@@ -53,13 +53,14 @@ function drawPlayer() {
 function drawPlatforms() {
   ctx.fillStyle = 'black';
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let platform of platformsLvlOne) {
+  for (let platform of platforms) {
     ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
   }
 }
 
 
 function startGame() {
+  platforms = platformsLvlOne
     console.log("Game started!");
     level = 1;
     checkCondition();
@@ -126,7 +127,7 @@ function playerCollision(player, platform) {
 
 //chat gpt helped with the math for this function
 function handleCollisions() {
-  for (let platform of platformsLvlOne) {
+  for (let platform of platforms) {
     if (playerCollision(player, platform)) {
       const fromTop = player.y + player.height - platform.y;
       const fromBottom = platform.y + platform.height - player.y;
