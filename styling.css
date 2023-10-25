@@ -29,10 +29,13 @@ Canvas {
 }
 
 button {
+    border-radius: 10px;
+    margin: 50px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: 28px;
     cursor: pointer;
-    color: aqua;
-    width: 1000px;
+    color: black;
+    width: 150px;
     height: 100px
 }

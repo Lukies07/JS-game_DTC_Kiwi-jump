@@ -128,12 +128,12 @@ function handleKeys() {
   } else {
       player.isMovingLeft = false;
   }
-
-  if ((keys["w"] || keys["ArrowUp"]) && !player.isJumping) {
-      player.velocityY = -player.jumpForce;
-      player.isJumping = true;
+  if ((keys["w"] || keys["ArrowUp"]) && !player.isJumping && player.y === canvas.height - player.height) {
+    player.velocityY = -player.jumpForce;
+    player.isJumping = true;
   }
 }
+
 
 function playerCollision(player, platform) {
   return (
@@ -148,7 +148,9 @@ function playerCollision(player, platform) {
 function drawPlayer() {
   ctx.fillStyle = 'blue';
   ctx.fillRect(player.x, player.y, player.width, player.height);
+  console.log(player.y)
 }
+
 
 
 function drawPlatforms() {
