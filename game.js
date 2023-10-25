@@ -128,7 +128,7 @@ function handleKeys() {
   } else {
       player.isMovingLeft = false;
   }
-  if ((keys["w"] || keys["ArrowUp"]) && !player.isJumping && player.y === canvas.height - player.height) {
+  if ((keys["w"] || keys["ArrowUp"]) && !player.isJumping && (player.y >= canvas.height - player.height || isOnPlatform())) {
     player.velocityY = -player.jumpForce;
     player.isJumping = true;
   }
@@ -144,6 +144,18 @@ function playerCollision(player, platform) {
   );
 }
 
+function isOnPlatform() {
+  for (let platform of platforms) {
+    if (
+      player.x < platform.x + platform.width &&
+      player.x + player.width > platform.x &&
+      player.y + player.height === platform.y
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
 
 function drawPlayer() {
   ctx.fillStyle = 'blue';
