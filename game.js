@@ -19,8 +19,41 @@ let player = {
   isMovingRight: false,
 };
 
-player.x = canvas.width/2;
-player.y = canvas.height - player.height;
+
+let kiwifruitLvlOne = {x: 500, y: canvas.height - 500, width: 250, height: 250}
+
+let powerUpJumpBoostLvlOne = [
+  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+ ];
+
+
+let kiwifruitLvlTwo = {x: 500, y: canvas.height - 500, width: 250, height: 250}
+
+let powerUpJumpBoostLvlTwo = [
+  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+ ];
+
+
+let kiwifruitLvlThree = {x: 500, y: canvas.height - 500, width: 250, height: 250}
+ 
+let powerUpJumpBoostLvlThree = [
+  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+ ];
+
+
+let kiwifruitLvlFour = {x: 500, y: canvas.height - 500, width: 250, height: 250}
+
+let powerUpJumpBoostLvlFour = [
+  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+ ];
+
+
+let kiwifruitLvlFive = {x: 500, y: canvas.height - 500, width: 250, height: 250};
+ 
+let powerUpJumpBoostLvlFive = [
+  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+ ];
+
 
 let platformsLvlOne = [ 
   { x: 150, y: canvas.height - 200, width: 200, height: 200 },
@@ -61,15 +94,11 @@ let platformsLvlFive = [
   { x: 500, y: canvas.height - 500, width: 200, height: 200 },
 ];
 
-let Kiwifruit = [
- {x: 500, y: canvas.height - 500, width: 25, height: 25}
-]
-
-let powerUpJumpBoost = [
- {x: 500, y: canvas.height - 500, width: 25, height: 25}
-]
+player.x = canvas.width/2;
+player.y = canvas.height - player.height;
 
 function startGameLvlOne() {
+  kiwifruit = kiwifruitLvlOne ;
   platforms = platformsLvlOne;
     console.log("Game started!");
     level = 1;
@@ -102,7 +131,7 @@ function startGameLvlThree() {
 function startGameLvlFour() {
   platforms = platformsLvlFour;
     console.log("Game started!");
-    level = 1;
+    level = 4;
     checkCondition();
     drawPlatforms(); 
     drawPlayer();
@@ -112,12 +141,13 @@ function startGameLvlFour() {
 function startGameLvlFive() {
   platforms = platformsLvlFive;
     console.log("Game started!");
-    level = 1;
+    level = 5;
     checkCondition();
     drawPlatforms(); 
     drawPlayer();
     requestAnimationFrame(gameLoop);
 }
+
 
 function checkCondition() {
     const titleScreen = document.getElementById("titleScreen");
@@ -185,6 +215,11 @@ function isOnPlatform() {
     }
   }
   return false;
+}
+
+function drawKiwiFruit() {
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(kiwifruit.x, kiwifruit.y, kiwifruit.width, kiwifruit.height);
 }
 
 function drawPlayer() {
@@ -270,6 +305,7 @@ function gameLoop() {
     handleKeys(); 
     playerUpdate();
     handleCollisions(); 
+    drawKiwiFruit();
     requestAnimationFrame(gameLoop);
     }
 }
