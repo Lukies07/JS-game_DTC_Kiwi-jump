@@ -19,6 +19,8 @@ let player = {
   isMovingRight: false,
 };
 
+player.x = canvas.width/2;
+player.y = canvas.height - player.height;
 
 let platformsLvlOne = [ 
   { x: 150, y: canvas.height - 200, width: 200, height: 200 },
@@ -47,15 +49,25 @@ let platformsLvlTwo = [
   { x: 0, y: canvas.height - 300, width: 1000, height: 20 },
 ];
 
-
 let platformsLvlThree = [ 
   { x: 150, y: canvas.height - 200, width: 200, height: 200 },
 ];
 
+let platformsLvlFour = [ 
+  { x: 150, y: canvas.height - 200, width: 200, height: 200 },
+];
 
-player.x = canvas.width/2;
-player.y = canvas.height - player.height;
+let platformsLvlFive = [ 
+  { x: 500, y: canvas.height - 500, width: 200, height: 200 },
+];
 
+let Kiwifruit = [
+ {x: 500, y: canvas.height - 500, width: 25, height: 25}
+]
+
+let powerUpJumpBoost = [
+ {x: 500, y: canvas.height - 500, width: 25, height: 25}
+]
 
 function startGameLvlOne() {
   platforms = platformsLvlOne;
@@ -65,7 +77,7 @@ function startGameLvlOne() {
     drawPlatforms(); 
     drawPlayer();
     requestAnimationFrame(gameLoop);
-  }
+}
 
 function startGameLvlTwo() {
   platforms = platformsLvlTwo;
@@ -75,7 +87,7 @@ function startGameLvlTwo() {
     drawPlatforms(); 
     drawPlayer();
     requestAnimationFrame(gameLoop);
-  }
+}
   
 function startGameLvlThree() {
   platforms = platformsLvlThree;
@@ -85,8 +97,27 @@ function startGameLvlThree() {
     drawPlatforms(); 
     drawPlayer(); 
     requestAnimationFrame(gameLoop);
-  }
+}
 
+function startGameLvlFour() {
+  platforms = platformsLvlFour;
+    console.log("Game started!");
+    level = 1;
+    checkCondition();
+    drawPlatforms(); 
+    drawPlayer();
+    requestAnimationFrame(gameLoop);
+}
+
+function startGameLvlFive() {
+  platforms = platformsLvlFive;
+    console.log("Game started!");
+    level = 1;
+    checkCondition();
+    drawPlatforms(); 
+    drawPlayer();
+    requestAnimationFrame(gameLoop);
+}
 
 function checkCondition() {
     const titleScreen = document.getElementById("titleScreen");
@@ -96,12 +127,11 @@ function checkCondition() {
     } else {
       titleScreen.classList.add("hidden");
     }
-  }
-
+}
 
 function MainMenu() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
+}
 
 
 let keys = {};
