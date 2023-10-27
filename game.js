@@ -253,8 +253,8 @@ function drawPlatforms() {
 function handleCollisions() {
   for (let platform of platforms) {
     if (playerCollision(player, platform)) {
-      const fromTop = player.y + player.height - platform.y - 10; //i added a 10 cause it fixed a bug somehow lol
-      const fromBottom = platform.y + platform.height - player.y + 10; //i added a 10 cause it fixed a bug somehow lol (player would glitch thru platform)
+      const fromTop = player.y + player.height - platform.y;
+      const fromBottom = platform.y + platform.height - player.y;
       const fromLeft = player.x + player.width - platform.x;
       const fromRight = platform.x + platform.width - player.x;
 
@@ -263,20 +263,21 @@ function handleCollisions() {
         player.y = platform.y - player.height;
         player.isJumping = false;
         player.velocityY = 0;
-      } else if (fromBottom < fromTop && fromBottom < fromLeft && fromBottom < fromRight) {
+      } 
+      if (fromBottom < fromTop && fromBottom < fromLeft && fromBottom < fromRight) {
         // Collision from the bottom, move the player back up
         player.y = platform.y + platform.height;
         player.velocityY = 0;
-      } else if (fromLeft < fromTop && fromLeft < fromBottom && fromLeft < fromRight) {
-        // Collision from the left, move the player back to the right
+      }
+        if (fromLeft < fromTop && fromLeft < fromBottom && fromLeft < fromRight) {
         player.x = platform.x - player.width;
-      } else if (fromRight < fromTop && fromRight < fromBottom && fromRight < fromLeft) {
-        // Collision from the right, move the player back to the left
+          } 
+        if (fromRight < fromTop && fromRight < fromBottom && fromRight < fromLeft) {
         player.x = platform.x + platform.width;
       }
     }
   }
-
+  
   for (let powerUp of powerUpJumpBoost) {
     powerUpJumpBoost.forEach ((powerUp, powerUpIndex) => {
     if(playerCollisionPowerUp(player, powerUp)) {
