@@ -8,7 +8,7 @@ let level = 0;
  
 let player = {
   x: undefined,
-  y: undefined,
+  y: undefined, 
   width: 25,
   height: 25,
   speed: 4,
@@ -20,48 +20,54 @@ let player = {
 };
 
 
-let kiwifruitLvlOne = {x: 500, y: canvas.height - 500,  width: 20, height: 20};
+let portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
 
 let powerUpJumpBoostLvlOne = [
-  {x: 700, y: canvas.height - 500,  width: 50, height: 50},
+  { x: 55, y: canvas.height - 175,  width: 25, height: 25 },
 ];
 
-let kiwifruitLvlTwo = {x: 500, y: canvas.height - 500,  width: 20, height: 20};
+let portalLvlTwo = {x: 500, y: canvas.height - 500,  width: 50, height: 20};
 
 let powerUpJumpBoostLvlTwo = [
-  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
  ];
 
 
-let kiwifruitLvlThree = {x: 500, y: canvas.height - 500, width: 50, height: 50};
+let portalLvlThree = {x: 500, y: canvas.height - 500, width: 50, height: 50};
  
 let powerUpJumpBoostLvlThree = [
-  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
  ];
 
 
-let kiwifruitLvlFour = {x: 500, y: canvas.height - 500,  width: 50, height: 50};
+let portalLvlFour = {x: 500, y: canvas.height - 500,  width: 50, height: 50};
 
 let powerUpJumpBoostLvl_Four = [
-  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
  ];
 
 
-let kiwifruitLvlFive = {x: 500, y: canvas.height - 500, width: 50, height: 50};
+let portalLvlFive = {x: 500, y: canvas.height - 500, width: 50, height: 50};
  
 let powerUpJumpBoostLvlFive = [
-  {x: 100, y: canvas.height - 100, width: 500, height: 500}
+  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
  ];
 
 
 let platformsLvlOne = [ 
-  { x: 600, y: canvas.height -200, width: 50, height: 200 }, //tall stick right
-  { x: 400, y: canvas.height -80, width: 50, height: 80 }, //tall stick left
+  { x: 580, y: canvas.height -180, width: 50, height: 180 }, //tall stick right
+  { x: 420, y: canvas.height -80, width: 50, height: 80 }, //tall stick left
+  { x: 630, y: canvas.height -80, width: 50, height: 25 }, //the little platform on the tall right stick (to help u get back up if u went too far right)
   { x: 100, y: canvas.height -150, width: 200, height: 20 }, // first platfroms player meant to jump to
   { x: 90, y: canvas.height -220, width: 50, height: 20 }, //the platfrom to jump inbetween on left side when on platform that the first player is meant to jump to
   { x: 180, y: canvas.height -220, width: 130, height: 20 }, //the platfrom to jump inbetween on right side when on platform that the first player is meant to jump to                                                
   { x: 80, y: canvas.height -220, width: 25, height: 90 }, //small wall on right side of 'first platform'
-
+  { x: 50, y: canvas.height -150, width: 40, height: 20 }, //small platfrom that is under the powerup
+  { x: 600, y: canvas.height -260, width: 50, height: 20 }, //small platfrom that the player needs to jump on to get to the portal
+  { x: 660, y: canvas.height -350, width: 50, height: 20 }, //small platform above the one from the previous line of code
+  { x: 790, y: canvas.height -350, width: 50, height: 20 }, //the platform that is 2 jumps behind the portal (3 gaps to the left)
+  { x: 920, y: canvas.height -350, width: 50, height: 20 }, //the platform that is 1 jump behind the portal
+  { x: 1040, y: canvas.height - 450,  width: 40, height: 20 } //the platform under the portal
 ];
 
 
@@ -89,7 +95,7 @@ player.y = canvas.height - player.height;
 
 function startGameLvlOne() {
   powerUpJumpBoost = powerUpJumpBoostLvlOne; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
-  kiwifruit = kiwifruitLvlOne;
+  portal = portalLvlOne;
   platforms = platformsLvlOne;
     console.log("Game started!");
     level = 1;
@@ -194,6 +200,15 @@ function playerCollision(player, platform) {
   );
 }
 
+function playerCollisionPowerUp(player, powerUpJumpBoost) {
+  return (
+    player.x < powerUpJumpBoost.x + powerUpJumpBoost.width &&
+    player.x + player.width > powerUpJumpBoost.x &&
+    player.y < powerUpJumpBoost.y + powerUpJumpBoost.height &&
+    player.y + player.height > powerUpJumpBoost.y
+  );
+}
+
 function isOnPlatform() {
   for (let platform of platforms) {
     if (
@@ -214,9 +229,9 @@ function drawPowerUpJumpBoost() {
   }
 }
 
-function drawKiwiFruit() {
-  ctx.fillStyle = 'red';
-  ctx.fillRect(kiwifruit.x, kiwifruit.y, kiwifruit.width, kiwifruit.height);
+function drawPortal() {
+  ctx.fillStyle = 'purple';
+  ctx.fillRect(portal.x, portal.y, portal.width, portal.height);
 }
 
 function drawPlayer() {
@@ -261,6 +276,15 @@ function handleCollisions() {
       }
     }
   }
+  for (let powerUp of powerUpJumpBoost) {
+    powerUpJumpBoost.forEach ((powerUp, powerUpIndex) => {
+    if(playerCollisionPowerUp(player, powerUp)) {
+      player.jumpForce += 1;
+      powerUpJumpBoost = powerUpJumpBoost.filter((_, index) => index !== powerUpIndex); //this line makes the power up dissapear after the player has collected it
+      console.log(player.jumpForce)
+    }
+  });
+}
 }
 
 function playerUpdate() {
@@ -298,7 +322,7 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawPlatforms();
     drawPowerUpJumpBoost();
-    drawKiwiFruit();
+    drawPortal();
     drawPlayer();
     handleKeys(); 
     playerUpdate();
