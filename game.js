@@ -5,7 +5,7 @@ canvas.width = 1080;
 canvas.height = 720;
 
 let level = 0;
- 
+
 let player = {
   x: undefined,
   y: undefined, 
@@ -253,8 +253,8 @@ function drawPlatforms() {
 function handleCollisions() {
   for (let platform of platforms) {
     if (playerCollision(player, platform)) {
-      const fromTop = player.y + player.height - platform.y;
-      const fromBottom = platform.y + platform.height - player.y;
+      const fromTop = player.y + player.height - platform.y - 10; //i added a 10 cause it fixed a bug somehow lol
+      const fromBottom = platform.y + platform.height - player.y + 10; //i added a 10 cause it fixed a bug somehow lol (player would glitch thru platform)
       const fromLeft = player.x + player.width - platform.x;
       const fromRight = platform.x + platform.width - player.x;
 
@@ -276,6 +276,7 @@ function handleCollisions() {
       }
     }
   }
+
   for (let powerUp of powerUpJumpBoost) {
     powerUpJumpBoost.forEach ((powerUp, powerUpIndex) => {
     if(playerCollisionPowerUp(player, powerUp)) {
@@ -284,17 +285,15 @@ function handleCollisions() {
       console.log(player.jumpForce)
     }
   });
-}
+ }
 }
 
 function playerUpdate() {
   const gravity = 0.5;
 
   if (!player.isJumping) {
-    // Apply a smaller gravity when the player is gliding off a platform
     player.velocityY += gravity;
   } else {
-    // Apply regular gravity when jumping
     player.velocityY += gravity;
   }
 
