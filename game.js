@@ -22,8 +22,7 @@ let player = {
   alpha: 1.0,
 };
 
-
-
+let touchingPortal = false
 
 let portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
 
@@ -166,6 +165,7 @@ function startGameLvlFive() {
     requestAnimationFrame(gameLoop);
 }
 
+//reset all player stats, canvas and other stuff
 function resetVars() {
   player = {
     x: undefined,
@@ -183,6 +183,7 @@ function resetVars() {
     alpha: 1.0,
   };
   
+  touchingPortal = false;
   playerAlpha = 1.0;
   
   portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
@@ -255,6 +256,7 @@ function resetVars() {
     { x: 500, y: canvas.height - 500, width: 200, height: 200 },
   ];
   console.log('reset vars')
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function checkCondition() {
@@ -412,20 +414,14 @@ function handleCollisions() {
  }
  
  if (playerCollisionPortal(player, portal)) {
-  console.log('player touched portal');
-  playerAlpha -= 0.01;
-
-    setTimeout(() => {
-    resetVars();
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    level = 0;
-    checkCondition();
-  }, 2000); // 2000 milliseconds (2 seconds) delay
+    console.log('player touched portal');
+    touchingPortal = true;
   }
- }
+}
 
 
 function playerUpdate() {
+
   const gravity = 0.5;
 
   if (!player.isJumping) {
@@ -450,6 +446,18 @@ function playerUpdate() {
 
   if (player.isMovingLeft && player.x > 0) {
     player.x -= player.speed;
+  }
+
+  if(playerAlpha <= 0) {
+    resetVars();
+    level = 0;
+    checkCondition();
+    touchingPortal = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };  
+
+  if (touchingPortal == true) {
+    playerAlpha -= 0.01;
   }
 }
 

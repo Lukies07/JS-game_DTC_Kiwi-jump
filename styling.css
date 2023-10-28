@@ -19,9 +19,8 @@ Canvas {
 #titleScreen {
     text-align: center;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 10%;
+    right: 10%;
 }
 
 .hidden {
@@ -30,12 +29,13 @@ Canvas {
 
 button {
     border-radius: 10px;
-    margin: 10px;
-    padding: 10px 20px;
+    margin: 30px;
+    padding: 0px 0px;
     font-weight: bold;
     font-size: 28px;
     cursor: pointer;
     color: black;
+    border-width: 10px;
     width: 150px;
-    height: 100px
+    height: 100px;
 }
