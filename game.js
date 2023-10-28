@@ -17,7 +17,12 @@ let player = {
   isJumping: false,
   isMovingLeft: false,
   isMovingRight: false,
+  isFading: false,
+  fadeDuration: 2000, // 2000 milliseconds (2 seconds)
+  alpha: 1.0,
 };
+
+
 
 
 let portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
@@ -173,8 +178,12 @@ function resetVars() {
     isJumping: false,
     isMovingLeft: false,
     isMovingRight: false,
+    isFading: false,
+    fadeDuration: 2000, // 2000 milliseconds (2 seconds)
+    alpha: 1.0,
   };
   
+  playerAlpha = 1.0;
   
   portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
   
@@ -245,7 +254,7 @@ function resetVars() {
   platformsLvlFive = [ 
     { x: 500, y: canvas.height - 500, width: 200, height: 200 },
   ];
-  
+  console.log('reset vars')
 }
 
 function checkCondition() {
@@ -267,12 +276,10 @@ let keys = {};
 
 document.addEventListener("keydown", function (event) {
   keys[event.key] = true;
-  console.log("Key down:", event.key);
 });
 
 document.addEventListener("keyup", function (event) {
   keys[event.key] = false;
-  console.log("Key up:", event.key);
 });
 
 function handleKeys() {
@@ -346,10 +353,14 @@ function drawPortal() {
   ctx.fillRect(portal.x, portal.y, portal.width, portal.height);
 }
 
+
 function drawPlayer() {
+  player.alpha = playerAlpha;
+  console.log("Player Alpha:", player.alpha);
+  ctx.globalAlpha = player.alpha;
+
   ctx.fillStyle = 'blue';
-  ctx.fillRect(player.x, player.y, player.width, player.height);
-  console.log(player.y)
+  ctx.fillRect(player.x, player.y, player.width, player.height);  
 }
 
 function drawPlatforms() {
@@ -400,18 +411,21 @@ function handleCollisions() {
   });
  }
  
-  if (playerCollisionPortal(player, portal)) {
-    console.log('player touched portal');
+ if (playerCollisionPortal(player, portal)) {
+  console.log('player touched portal');
+  playerAlpha -= 0.01;
+
+    setTimeout(() => {
     resetVars();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     level = 0;
     checkCondition();
+  }, 2000); // 2000 milliseconds (2 seconds) delay
   }
  }
 
 
-
-function playerUpdate() { 
+function playerUpdate() {
   const gravity = 0.5;
 
   if (!player.isJumping) {
@@ -443,13 +457,13 @@ function gameLoop() {
   checkCondition(); 
   if (level >= 1) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    handleCollisions();  
     drawPlatforms();
     drawPowerUpJumpBoost();
     drawPortal();
     drawPlayer();
     handleKeys(); 
     playerUpdate();
-    handleCollisions(); 
     requestAnimationFrame(gameLoop);
   }
 }
