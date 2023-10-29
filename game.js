@@ -20,6 +20,7 @@ let player = {
   isFading: false,
   fadeDuration: 2000, // 2000 milliseconds (2 seconds)
   alpha: 1.0,
+  hasKiwiSpirit: false
 };
 
 let gravity = 0.5;
@@ -43,6 +44,8 @@ let platformsLvlOne = [
   { x: 1040, y: canvas.height - 450,  width: 40, height: 20 } //the platform under the portal
 ];
 
+let kiwiSpiritLvlOne = {x: 0, y:canvas.height - 0, windth: 25, height: 25}; 
+
 let portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
 
 let powerUpJumpBoostLvlOne = [
@@ -64,6 +67,8 @@ let platformsLvlTwo = [
   { x: 860, y: canvas.height -180, width: 150, height: 25 }, //platfrom to get to the portal the portal
   { x: 1005, y: canvas.height -320, width: 75, height: 25 }, //platform under the portal
 ];
+
+let kiwiSpiritLvlTwo = {x: 0, y:canvas.height - 0, windth: 25, height: 25}; 
 
 let portalLvlTwo = { x: 1040, y: canvas.height -370, width: 40, height: 50 };
 
@@ -98,6 +103,8 @@ let platformsLvlThree = [
 
 ];
 
+let kiwiSpiritLvlThree = {x: 0, y:canvas.height - 25, width: 25, height: 25}; 
+
 let portalLvlThree = {x: 0, y: canvas.height - 500, width: 40, height: 50};
  
 let powerUpJumpBoostLvlThree = [
@@ -110,26 +117,11 @@ let powerUpJumpBoostLvlThree = [
   { x: 1055, y: canvas.height - 360, width: 25, height: 25 }, // the one after doing the 3 head hitters
 ];
 
-//level 4
-let platformsLvlFour = [ 
-  { x: 150, y: canvas.height - 200, width: 200, height: 200 },
-];
-
-let portalLvlFour = {x: 500, y: canvas.height - 500,  width: 50, height: 50};
-
-let powerUpJumpBoostLvlFour = [
-  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
-];
-
- let powerUpSpeedBoostLvlFour = [
-  
-];
-
-
 function startGameLvlOne() {
   resetVars();
   player.x = canvas.width/2 - player.width;
   player.y = canvas.height - player.height;
+  kiwiSpirit = kiwiSpiritLvlOne
   powerUpSpeedBoost = powerUpSpeedBoostLvlOne
   powerUpJumpBoost = powerUpJumpBoostLvlOne; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   portal = portalLvlOne;
@@ -145,6 +137,7 @@ function startGameLvlTwo() {
   resetVars();
   player.x = canvas.width/2 - player.width;
   player.y = canvas.height - player.height;
+  kiwiSpirit = kiwiSpiritLvlTwo
   powerUpSpeedBoost = powerUpSpeedBoostLvlTwo
   powerUpJumpBoost = powerUpJumpBoostLvlTwo; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   portal = portalLvlTwo;
@@ -160,27 +153,13 @@ function startGameLvlThree() {
   resetVars();
   player.x = canvas.width/2 - player.width;
   player.y = canvas.height - player.height;
+  kiwiSpirit = kiwiSpiritLvlThree;
   powerUpSpeedBoost = powerUpSpeedBoostLvlThree
   powerUpJumpBoost = powerUpJumpBoostLvlThree; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   portal = portalLvlThree;
   platforms = platformsLvlThree;
     console.log("Game started!");
     level = 3;
-    checkCondition();
-    drawPlayer(); 
-    requestAnimationFrame(gameLoop);
-}
-
-function startGameLvlFour() {
-  resetVars();
-  player.x = canvas.width/2;
-  player.y = canvas.height - player.height;
-  powerUpSpeedBoost = powerUpSpeedBoostLvlFour
-  powerUpJumpBoost = powerUpJumpBoostLvlFour; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
-  portal = portalLvlFour;
-  platforms = platformsLvlFour;
-    console.log("Game started!");
-    level = 4;
     checkCondition();
     drawPlayer(); 
     requestAnimationFrame(gameLoop);
@@ -202,8 +181,9 @@ function resetVars() {
     isFading: false,
     fadeDuration: 2000, // 2000 milliseconds (2 seconds)
     alpha: 1.0,
+    hasKiwiSpirit: false
   };
-  
+
   gravity = 0.5;
   touchingPortal = false;
   playerAlpha = 1.0;
@@ -283,6 +263,15 @@ function playerCollisionPortal(player, portal) {
   );
 }
 
+function playerCollisionKiwiSpirit(player, kiwiSpirit) {
+  return (
+    player.x < kiwiSpirit.x + kiwiSpirit.width &&
+    player.x + player.width > kiwiSpirit.x &&
+    player.y < kiwiSpirit.y + kiwiSpirit.height &&
+    player.y + player.height > kiwiSpirit.y
+  );
+}
+
 function isOnPlatform() {
   for (let platform of platforms) {
     if (
@@ -315,6 +304,12 @@ function drawPortal() {
   ctx.fillRect(portal.x, portal.y, portal.width, portal.height);
 }
 
+function drawKiwiSpirit() {
+  if (!player.hasKiwiSpirit) {
+    ctx.fillStyle = 'orange';
+    ctx.fillRect(kiwiSpirit.x, kiwiSpirit.y, kiwiSpirit.width, kiwiSpirit.height);
+  }
+}
 
 function drawPlayer() {
   player.alpha = playerAlpha;
@@ -329,9 +324,20 @@ function drawPlatforms() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let platform of platforms) {
     ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-  }
+  } 
 }
 
+//this is for the pop up to tel ppl that the need kiwiSpirit to pick up the powerUp
+function displayPopup(message, color = "#ff0000", kiwiSpiritColor = "#ffa500") {
+  const popup = document.getElementById("popup");
+  popup.innerHTML = message.replace(/kiwi spirit/g, `<span style="color: ${kiwiSpiritColor}; font-weight: bold;">kiwi spirit</span>`);
+  popup.style.backgroundColor = color;
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 2000); // Hide the popup after 2 seconds
+}
 
 //chat gpt helped with the math for this function
 function handleCollisions() {
@@ -362,30 +368,53 @@ function handleCollisions() {
     }
   }
   
-  for (let _powerUpJump of powerUpJumpBoost) {
-    powerUpJumpBoost.forEach ((powerUpJump, powerUpJumpIndex) => {
-    if(playerCollisionPowerUp(player, powerUpJump)) {
-      player.jumpForce += 1;
-      powerUpJumpBoost = powerUpJumpBoost.filter((_, index) => index !== powerUpJumpIndex); //this line makes the power up dissapear after the player has collected it
-      console.log(player.jumpForce)
-    }
-  });
- }
+  if (playerCollisionKiwiSpirit(player, kiwiSpirit)) {
+    console.log('Player touched kiwi spirit');
+    player.hasKiwiSpirit = true;
+    kiwiSpirit = {}; // Remove kiwi spirit by emptying its properties
+  }
 
- for (let _powerUpSpeed of powerUpSpeedBoost) {
-  powerUpSpeedBoost.forEach ((powerUpSpeed, powerUpSpeedIndex) => {
-  if(playerCollisionPowerUp(player, powerUpSpeed)) {
-    player.speed += 0.5;
-    powerUpSpeedBoost = powerUpSpeedBoost.filter((_, index) => index !== powerUpSpeedIndex); //this line makes the power up dissapear after the player has collected it
-    console.log(player.speed)
+  // Check for collision with power up jump boost
+  for (let _powerUpJump of powerUpJumpBoost) {
+    powerUpJumpBoost.forEach((powerUpJump, powerUpJumpIndex) => {
+      if (playerCollisionPowerUp(player, powerUpJump)) {
+        if (player.hasKiwiSpirit) {
+          player.jumpForce += 1;
+          powerUpJumpBoost = powerUpJumpBoost.filter((_, index) => index !== powerUpJumpIndex);
+          console.log(player.jumpForce);
+        } else {
+          displayPopup("You need kiwi spirit to obtain a jump boost!", "#ff5100cd", "#00ff00");
+        }
+      }
+    });
   }
-});
+
+  // Check for collision with power up speed boost
+  for (let _powerUpSpeed of powerUpSpeedBoost) {
+    powerUpSpeedBoost.forEach((powerUpSpeed, powerUpSpeedIndex) => {
+      if (playerCollisionPowerUp(player, powerUpSpeed)) {
+        if (player.hasKiwiSpirit) {
+          player.speed += 0.5;
+          powerUpSpeedBoost = powerUpSpeedBoost.filter((_, index) => index !== powerUpSpeedIndex);
+          console.log(player.speed);
+        } else {
+          displayPopup("You need kiwi spirit to obtain a jump boost!", "#ff5100cd", "#00ff00");
+        }
+      } 
+    });
+  }
+
+ if (playerCollisionKiwiSpirit(player, kiwiSpirit)) {
+  console.log('Player touched kiwi spirit');
+  player.hasKiwiSpirit = true;
+  kiwiSpirit = {}; // Remove kiwi spirit by emptying its properties
 }
- 
+
+
  if (playerCollisionPortal(player, portal)) {
-    console.log('player touched portal');
-    touchingPortal = true;
-  }
+  console.log('player touched portal');
+  touchingPortal = true;
+ }
 }
 
 
@@ -434,6 +463,7 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     handleCollisions();  
     drawPlatforms();
+    drawKiwiSpirit();
     drawPowerUpJumpBoost();
     drawPowerUpSpeedBoost();
     drawPortal();

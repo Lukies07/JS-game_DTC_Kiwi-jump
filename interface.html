@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="styling.css">
-    <title>Simple Game</title>
+    <title>Kiwi Leap</title>
 </head>
-
-  <body>
+<body>
     <canvas id='gameCanvas'></canvas>
+    <div id="popup" style="display: none;"></div>
     
     <div id="titleScreen" class="hidden">
-      <h1>Kiwi leap</h1>
-      <button onclick="startGameLvlOne()">Level 1</button>
-      <button onclick="startGameLvlTwo()">Level 2</button>
-      <button onclick="startGameLvlThree()">Level 3</button>
-      <button onclick="startGameLvlFour()">Level 4</button>
+        <h1>Kiwi leap</h1>
+        <button onclick="startGameLvlOne()">Level 1</button>
+        <button onclick="startGameLvlTwo()">Level 2</button>
+        <button onclick="startGameLvlThree()">Level 3</button>
     </div>
-
+    
     <script src="game.js"></script>
-  </body>
+</body>
 </html>

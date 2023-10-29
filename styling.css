@@ -14,6 +14,7 @@ Canvas {
     height: 90vh;
     background-color: lightgreen;
     border: 10px solid black;
+    border-radius: 10px;
 }
 
 #titleScreen {
@@ -38,4 +39,18 @@ button {
     border-width: 10px;
     width: 150px;
     height: 100px;
+}
+
+#popup {
+    font-size: 20px;
+    text-align: center;
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff5100cd;
+    padding: 15px;
+    border: 10px solid #000000;
+    text-align: center;
+    border-radius: 10px;
 }
