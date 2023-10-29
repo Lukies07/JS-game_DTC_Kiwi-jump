@@ -22,6 +22,7 @@ let player = {
   alpha: 1.0,
 };
 
+let gravity = 0.5;
 let touchingPortal = false
 
 
@@ -76,19 +77,37 @@ let powerUpSpeedBoostLvlTwo = [
 ]
 
 //level 3
-let platformsLvlThree = [ 
-  { x: 600, y: canvas.height - 90, width: 50, height: 25 },
+let platformsLvlThree = [
+  { x: 0, y: canvas.height - 600, width: 1080, height: 25 }, //delete later
+  { x: 450, y: canvas.height - 90, width: 50, height: 25 }, //first floating platform the one with the power up on it 
+  { x: 450, y: canvas.height - 180, width: 50, height: 25 }, //second platform, the one above the first platform
+  { x: 450, y: canvas.height - 270, width: 50, height: 25 }, //third platform above the second platform
+  { x: 570, y: canvas.height - 350, width: 50, height: 350 }, //tall wall on the right of where the player spawns
+
+  { x: 620, y: canvas.height - 75, width: 50, height: 25 }, //platform to help player get back up
+  { x: 650, y: canvas.height - 150, width: 45, height: 25 }, //first head hitterplatform
+  { x: 765, y: canvas.height - 150, width: 45, height: 25 }, //second head hitterplatform
+  { x: 880, y: canvas.height - 150, width: 45, height: 25 }, //third head hitterplatform
+  { x: 995, y: canvas.height - 150, width: 45, height: 25 }, //fourth head hitterplatform (platform on right side of roof of head hitter )
+  { x: 650, y: canvas.height - 280, width: 25, height: 75 }, //wall to stop player from getting past unless they have jump boost
+  { x: 650, y: canvas.height - 230, width: 350, height: 25 }, //platform above the three jumps to the right (the roof for the head hitter jump)
+  { x: 1030, y: canvas.height - 230, width: 50, height: 25 }, //platform with jump boost and speed boost on it 
+  { x: 975, y: canvas.height - 380, width: 25, height: 150 }, //platform on right side of roof of head hitter 
+
+
 
 ];
 
 let portalLvlThree = {x: 0, y: canvas.height - 500, width: 40, height: 50};
  
 let powerUpJumpBoostLvlThree = [
-  { x: 0, y: canvas.height - 0, width: 0, height: 0 }
+  { x: 450, y: canvas.height - 115, width: 25, height: 25 }, //above the first platform
+  { x: 620, y: canvas.height - 25, width: 25, height: 25 }, //under the platform to get up
+  { x: 1000, y: canvas.height - 380, width: 25, height: 25 }, // the one after doing the 3 head hitters
 ];
 
  let powerUpSpeedBoostLvlThree = [
-  
+  { x: 1055, y: canvas.height - 360, width: 25, height: 25 }, // the one after doing the 3 head hitters
 ];
 
 //level 4
@@ -185,6 +204,7 @@ function resetVars() {
     alpha: 1.0,
   };
   
+  gravity = 0.5;
   touchingPortal = false;
   playerAlpha = 1.0;
   
@@ -370,8 +390,6 @@ function handleCollisions() {
 
 
 function playerUpdate() {
-
-  const gravity = 0.5;
 
   if (!player.isJumping) {
     player.velocityY += gravity;
