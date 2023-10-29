@@ -24,40 +24,8 @@ let player = {
 
 let touchingPortal = false
 
-let portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
 
-let powerUpJumpBoostLvlOne = [
-  { x: 55, y: canvas.height - 175,  width: 25, height: 25 },
-];
-
-let portalLvlTwo = {x: 500, y: canvas.height - 500,  width: 50, height: 20};
-
-let powerUpJumpBoostLvlTwo = [
-  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
- ];
-
-
-let portalLvlThree = {x: 500, y: canvas.height - 500, width: 50, height: 50};
- 
-let powerUpJumpBoostLvlThree = [
-  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
- ];
-
-
-let portalLvlFour = {x: 500, y: canvas.height - 500,  width: 50, height: 50};
-
-let powerUpJumpBoostLvl_Four = [
-  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
- ];
-
-
-let portalLvlFive = {x: 500, y: canvas.height - 500, width: 50, height: 50};
- 
-let powerUpJumpBoostLvlFive = [
-  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
- ];
-
-
+//level 1
 let platformsLvlOne = [ 
   { x: 580, y: canvas.height -180, width: 50, height: 180 }, //tall stick right
   { x: 420, y: canvas.height -80, width: 50, height: 80 }, //tall stick left
@@ -74,30 +42,76 @@ let platformsLvlOne = [
   { x: 1040, y: canvas.height - 450,  width: 40, height: 20 } //the platform under the portal
 ];
 
+let portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
 
+let powerUpJumpBoostLvlOne = [
+  { x: 55, y: canvas.height - 175,  width: 25, height: 25 },
+];
+let powerUpSpeedBoostLvlOne = [
+  
+];
+
+//level 2
 let platformsLvlTwo = [ 
-  { x: 150, y: canvas.height - 200, width: 50, height: 200 },
-  { x: 450, y: canvas.height - 250, width: 50, height: 100 },
-  { x: 350, y: canvas.height - 200, width: 100, height: 20 },
-  { x: 0, y: canvas.height - 300, width: 1000, height: 20 },
+  { x: 150, y: canvas.height - 90, width: 50, height: 90 }, //bottom stick on the left that player has to jump on
+  { x: 150, y: canvas.height - 200, width: 50, height: 60 }, //the one above the first stick on the left
+  { x: 150, y: canvas.height - 330, width: 225, height: 90 }, //the platform that acts as a roof
+  { x: 200, y: canvas.height -200, width: 200, height: 25 }, //the platform that is like the ground once player has got the jump boost and then jumped on top of this platform
+  { x: 350, y: canvas.height -150, width: 50, height: 25 }, //the platform under the JumpBoostPowerUp
+  { x: 350, y: canvas.height -175, width: 25, height: 25 }, //the back wall for the power up
+  { x: 550, y: canvas.height -330, width: 50, height: 305 }, //tall stick on the right of player spawnpoint
+  { x: 860, y: canvas.height -180, width: 150, height: 25 }, //platfrom to get to the portal the portal
+  { x: 1005, y: canvas.height -320, width: 75, height: 25 }, //platform under the portal
 ];
 
+let portalLvlTwo = { x: 1040, y: canvas.height -370, width: 40, height: 50 };
+
+let powerUpJumpBoostLvlTwo = [
+  { x: 0, y: canvas.height - 210, width: 25, height: 25 },
+  { x: 375, y: canvas.height -175, width: 25, height: 25 },
+];
+ 
+let powerUpSpeedBoostLvlTwo = [
+  {x: 0, y: canvas.height - 500, width: 25, height: 25},
+]
+
+//level 3
 let platformsLvlThree = [ 
-  { x: 150, y: canvas.height - 200, width: 200, height: 200 },
+  { x: 600, y: canvas.height - 90, width: 50, height: 25 },
+
 ];
 
+let portalLvlThree = {x: 0, y: canvas.height - 500, width: 40, height: 50};
+ 
+let powerUpJumpBoostLvlThree = [
+  { x: 0, y: canvas.height - 0, width: 0, height: 0 }
+];
+
+ let powerUpSpeedBoostLvlThree = [
+  
+];
+
+//level 4
 let platformsLvlFour = [ 
   { x: 150, y: canvas.height - 200, width: 200, height: 200 },
 ];
 
-let platformsLvlFive = [ 
-  { x: 500, y: canvas.height - 500, width: 200, height: 200 },
+let portalLvlFour = {x: 500, y: canvas.height - 500,  width: 50, height: 50};
+
+let powerUpJumpBoostLvlFour = [
+  { x: 100, y: canvas.height - 100, width: 500, height: 500 }
 ];
+
+ let powerUpSpeedBoostLvlFour = [
+  
+];
+
 
 function startGameLvlOne() {
   resetVars();
-  player.x = canvas.width/2;
+  player.x = canvas.width/2 - player.width;
   player.y = canvas.height - player.height;
+  powerUpSpeedBoost = powerUpSpeedBoostLvlOne
   powerUpJumpBoost = powerUpJumpBoostLvlOne; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   portal = portalLvlOne;
   platforms = platformsLvlOne;
@@ -110,58 +124,46 @@ function startGameLvlOne() {
 
 function startGameLvlTwo() {
   resetVars();
-  player.x = canvas.width/2;
+  player.x = canvas.width/2 - player.width;
   player.y = canvas.height - player.height;
+  powerUpSpeedBoost = powerUpSpeedBoostLvlTwo
   powerUpJumpBoost = powerUpJumpBoostLvlTwo; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   portal = portalLvlTwo;
   platforms = platformsLvlTwo;
     console.log("Game started!");
     level = 2;
     checkCondition();
-    drawPlatforms(); 
     drawPlayer();
     requestAnimationFrame(gameLoop);
 }
   
 function startGameLvlThree() {
-  player.x = canvas.width/2;
+  resetVars();
+  player.x = canvas.width/2 - player.width;
   player.y = canvas.height - player.height;
+  powerUpSpeedBoost = powerUpSpeedBoostLvlThree
   powerUpJumpBoost = powerUpJumpBoostLvlThree; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   portal = portalLvlThree;
   platforms = platformsLvlThree;
     console.log("Game started!");
     level = 3;
     checkCondition();
-    drawPlatforms(); 
     drawPlayer(); 
     requestAnimationFrame(gameLoop);
 }
 
 function startGameLvlFour() {
+  resetVars();
   player.x = canvas.width/2;
   player.y = canvas.height - player.height;
+  powerUpSpeedBoost = powerUpSpeedBoostLvlFour
   powerUpJumpBoost = powerUpJumpBoostLvlFour; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   portal = portalLvlFour;
   platforms = platformsLvlFour;
     console.log("Game started!");
     level = 4;
     checkCondition();
-    drawPlatforms(); 
-    drawPlayer();
-    requestAnimationFrame(gameLoop);
-}
-
-function startGameLvlFive() {
-  player.x = canvas.width/2;
-  player.y = canvas.height - player.height;
-  powerUpJumpBoost = powerUpJumpBoostLvlFive; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
-  portal = portalLvlFive;
-  platforms = platformsLvlFive;
-    console.log("Game started!");
-    level = 5;
-    checkCondition();
-    drawPlatforms(); 
-    drawPlayer();
+    drawPlayer(); 
     requestAnimationFrame(gameLoop);
 }
 
@@ -186,75 +188,6 @@ function resetVars() {
   touchingPortal = false;
   playerAlpha = 1.0;
   
-  portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
-  
-  powerUpJumpBoostLvlOne = [
-    { x: 55, y: canvas.height - 175,  width: 25, height: 25 },
-  ];
-  
-  portalLvlTwo = {x: 500, y: canvas.height - 500,  width: 50, height: 20};
-  
-  powerUpJumpBoostLvlTwo = [
-    { x: 100, y: canvas.height - 100, width: 500, height: 500 }
-   ];
-  
-  
-  portalLvlThree = {x: 500, y: canvas.height - 500, width: 50, height: 50};
-   
-  powerUpJumpBoostLvlThree = [
-    { x: 100, y: canvas.height - 100, width: 500, height: 500 }
-   ];
-  
-  
-  portalLvlFour = {x: 500, y: canvas.height - 500,  width: 50, height: 50};
-  
-  powerUpJumpBoostLvl_Four = [
-    { x: 100, y: canvas.height - 100, width: 500, height: 500 }
-   ];
-  
-  
-  portalLvlFive = {x: 500, y: canvas.height - 500, width: 50, height: 50};
-   
-  powerUpJumpBoostLvlFive = [
-    { x: 100, y: canvas.height - 100, width: 500, height: 500 }
-   ];
-  
-  
-  platformsLvlOne = [ 
-    { x: 580, y: canvas.height -180, width: 50, height: 180 }, //tall stick right
-    { x: 420, y: canvas.height -80, width: 50, height: 80 }, //tall stick left
-    { x: 630, y: canvas.height -80, width: 50, height: 25 }, //the little platform on the tall right stick (to help u get back up if u went too far right)
-    { x: 100, y: canvas.height -150, width: 200, height: 20 }, // first platfroms player meant to jump to
-    { x: 90, y: canvas.height -220, width: 50, height: 20 }, //the platfrom to jump inbetween on left side when on platform that the first player is meant to jump to
-    { x: 180, y: canvas.height -220, width: 130, height: 20 }, //the platfrom to jump inbetween on right side when on platform that the first player is meant to jump to                                                
-    { x: 80, y: canvas.height -220, width: 25, height: 90 }, //small wall on right side of 'first platform'
-    { x: 50, y: canvas.height -150, width: 40, height: 20 }, //small platfrom that is under the powerup
-    { x: 600, y: canvas.height -260, width: 50, height: 20 }, //small platfrom that the player needs to jump on to get to the portal
-    { x: 660, y: canvas.height -350, width: 50, height: 20 }, //small platform above the one from the previous line of code
-    { x: 790, y: canvas.height -350, width: 50, height: 20 }, //the platform that is 2 jumps behind the portal (3 gaps to the left)
-    { x: 920, y: canvas.height -350, width: 50, height: 20 }, //the platform that is 1 jump behind the portal
-    { x: 1040, y: canvas.height - 450,  width: 40, height: 20 } //the platform under the portal
-  ];
-  
-  
-  platformsLvlTwo = [ 
-    { x: 150, y: canvas.height - 200, width: 50, height: 200 },
-    { x: 450, y: canvas.height - 250, width: 50, height: 100 },
-    { x: 350, y: canvas.height - 200, width: 100, height: 20 },
-    { x: 0, y: canvas.height - 300, width: 1000, height: 20 },
-  ];
-  
-  platformsLvlThree = [ 
-    { x: 150, y: canvas.height - 200, width: 200, height: 200 },
-  ];
-  
-  platformsLvlFour = [ 
-    { x: 150, y: canvas.height - 200, width: 200, height: 200 },
-  ];
-  
-  platformsLvlFive = [ 
-    { x: 500, y: canvas.height - 500, width: 200, height: 200 },
-  ];
   console.log('reset vars')
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -345,8 +278,15 @@ function isOnPlatform() {
 
 function drawPowerUpJumpBoost() {
   ctx.fillStyle = 'yellow';
-  for (let powerUp of powerUpJumpBoost) {
-    ctx.fillRect(powerUp.x, powerUp.y, powerUp.width, powerUp.height);
+  for (let powerUpJump of powerUpJumpBoost) {
+    ctx.fillRect(powerUpJump.x, powerUpJump.y, powerUpJump.width, powerUpJump.height);
+  }
+}
+
+function drawPowerUpSpeedBoost() {
+  ctx.fillStyle = 'green';
+  for (let powerUpSpeed of powerUpSpeedBoost) {
+    ctx.fillRect(powerUpSpeed.x, powerUpSpeed.y, powerUpSpeed.width, powerUpSpeed.height);
   }
 }
 
@@ -358,7 +298,6 @@ function drawPortal() {
 
 function drawPlayer() {
   player.alpha = playerAlpha;
-  console.log("Player Alpha:", player.alpha);
   ctx.globalAlpha = player.alpha;
 
   ctx.fillStyle = 'blue';
@@ -403,15 +342,25 @@ function handleCollisions() {
     }
   }
   
-  for (let powerUp of powerUpJumpBoost) {
-    powerUpJumpBoost.forEach ((powerUp, powerUpIndex) => {
-    if(playerCollisionPowerUp(player, powerUp)) {
+  for (let _powerUpJump of powerUpJumpBoost) {
+    powerUpJumpBoost.forEach ((powerUpJump, powerUpJumpIndex) => {
+    if(playerCollisionPowerUp(player, powerUpJump)) {
       player.jumpForce += 1;
-      powerUpJumpBoost = powerUpJumpBoost.filter((_, index) => index !== powerUpIndex); //this line makes the power up dissapear after the player has collected it
+      powerUpJumpBoost = powerUpJumpBoost.filter((_, index) => index !== powerUpJumpIndex); //this line makes the power up dissapear after the player has collected it
       console.log(player.jumpForce)
     }
   });
  }
+
+ for (let _powerUpSpeed of powerUpSpeedBoost) {
+  powerUpSpeedBoost.forEach ((powerUpSpeed, powerUpSpeedIndex) => {
+  if(playerCollisionPowerUp(player, powerUpSpeed)) {
+    player.speed += 0.5;
+    powerUpSpeedBoost = powerUpSpeedBoost.filter((_, index) => index !== powerUpSpeedIndex); //this line makes the power up dissapear after the player has collected it
+    console.log(player.speed)
+  }
+});
+}
  
  if (playerCollisionPortal(player, portal)) {
     console.log('player touched portal');
@@ -468,6 +417,7 @@ function gameLoop() {
     handleCollisions();  
     drawPlatforms();
     drawPowerUpJumpBoost();
+    drawPowerUpSpeedBoost();
     drawPortal();
     drawPlayer();
     handleKeys(); 
