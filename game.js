@@ -83,50 +83,60 @@ let powerUpSpeedBoostLvlTwo = [
 
 //level 3
 let platformsLvlThree = [
-  { x: 0, y: canvas.height - 600, width: 1080, height: 25 }, //delete later
   { x: 450, y: canvas.height - 90, width: 50, height: 25 }, //first floating platform the one with the power up on it 
   { x: 450, y: canvas.height - 180, width: 50, height: 25 }, //second platform, the one above the first platform
   { x: 450, y: canvas.height - 270, width: 50, height: 25 }, //third platform above the second platform
   { x: 450, y: canvas.height - 360, width: 50, height: 25 }, //fourth platform above the second platform
-  { x: 570, y: canvas.height - 430, width: 50, height: 430 }, //tall wall on the right of where the player spawns
+  { x: 570, y: canvas.height - 430, width: 25, height: 430 }, //tall wall on the right of where the player spawns
 
-  { x: 620, y: canvas.height - 75, width: 50, height: 25 }, //platform to help player get back up
+  { x: 595, y: canvas.height - 75, width: 50, height: 25 }, //platform to help player get back up
   { x: 650, y: canvas.height - 150, width: 50, height: 25 }, //first head hitterplatform
   { x: 765, y: canvas.height - 150, width: 50, height: 25 }, //second head hitterplatform
   { x: 880, y: canvas.height - 150, width: 50, height: 25 }, //third head hitterplatform
   { x: 995, y: canvas.height - 150, width: 50, height: 25 }, //fourth head hitterplatform (platform on right side of roof of head hitter )
-  { x: 975, y: canvas.height - 350, width: 25, height: 145 }, //platform on right side of roof of head hitter 
-  { x: 975, y: canvas.height - 500, width: 25, height: 100 }, //the floating wall that make a hole between itself and the wall on the right side of head hitter roof 
+  { x: 975, y: canvas.height - 345, width: 25, height: 140 }, //wall on right side of roof of head hitter 
+  { x: 975, y: canvas.height - 425, width: 25, height: 40 }, //the floating wall that make a hole between itself and the wall on the right side of head hitter roof 
   { x: 650, y: canvas.height - 450, width: 25, height: 220 }, //wall on left side of the head hitter roof
   { x: 650, y: canvas.height - 230, width: 350, height: 25 }, //platform above the three jumps to the right (the roof for the head hitter jump)
-  { x: 1030, y: canvas.height - 230, width: 50, height: 25 }, //platform with jump boost and speed boost on it 
-  { x: 675, y: canvas.height - 450, width: 325, height: 25 }, //the roof for the box on the right side of canvas
-  { x: 1030, y: canvas.height - 460, width: 15, height: 60 }, //the floating wall that stops the player from gettign speed boost
+  { x: 1030, y: canvas.height - 230, width: 50, height: 25 }, //platform with jump boost and speed boost above it 
+  { x: 675, y: canvas.height - 450, width: 410, height: 25 }, //the roof for the box on the right side of canvas
+  { x: 1030, y: canvas.height - 425, width: 15, height: 75 }, //the floating wall that stops the player from getting speed boost
+  { x: 625, y: canvas.height - 300, width: 25, height: 15 }, // the small platform that the player uses to get back upover the tall stick on the right side of where the player spawns 
 
   { x: 915, y: canvas.height - 390, width: 15, height: 160 }, //the stick that the player has to do a head hitter jump to get over
   { x: 715, y: canvas.height - 375, width: 150, height: 15 }, //the long platform under the jump boost
-  { x: 865, y: canvas.height - 425, width: 15, height: 65 }, //the wall blocking player from just easily getting the jump boost
+  { x: 865, y: canvas.height - 425, width: 15, height: 65, }, //the wall blocking player from just easily getting the jump boost
   { x: 770, y: canvas.height - 335, width: 145, height: 15 }, //the seconds platform slightly shorter than the one under the jump boost and is lower down
   { x: 715, y: canvas.height - 295, width: 175, height: 15 }, //the platform that goes to the left from the wall(of the line underneath)
   { x: 730, y: canvas.height - 360, width: 15, height: 65 }, //the wall that is on the right if u were going up to get the jump boost
   { x: 840, y: canvas.height - 255, width: 15, height: 40 }, //first tiny pole to jump over
   { x: 780, y: canvas.height - 255, width: 15, height: 40 }, //Second tiny pole to jump over
   { x: 675, y: canvas.height - 335, width: 25, height: 15 }, //the tiny platform on the right of the left wall of the box
+
+  { x: 230, y: canvas.height - 600, width: 25, height: 350 }, // the top wall on the left that the player has to go through
+  { x: 230, y: canvas.height - 200, width: 25, height: 200 }, //the bottom wal on the left that the player has to jump through
+  { x: 255, y: canvas.height - 375, width: 150, height: 25 }, //the platform stopping player from easily getting thru gap on the left side
+  { x: 425, y: canvas.height - 180, width: 25, height: 115 }, //the wall that stops player from getting throught the gap from the first platform
+  { x: 100, y: canvas.height - 100, width: 50, height: 25 }, // the platform down low on the left
+  { x: 120, y: canvas.height - 200, width: 50, height: 25 },
+  { x: 20, y: canvas.height - 400, width: 50, height: 25 },
+
 ];
 
-let kiwiSpiritLvlThree = { x: 1000, y: canvas.height - 330, width: 25, height: 25 };   
+let kiwiSpiritLvlThree = { x: 300, y: canvas.height - 25, width: 25, height: 25 }; //{ x: 1055, y: canvas.height - 330, width: 25, height: 25 };
 
 let portalLvlThree = {x: 0, y: canvas.height - 500, width: 40, height: 50};
  
 let powerUpJumpBoostLvlThree = [
-  { x: 450, y: canvas.height - 115, width: 25, height: 25 }, //above the first platform
-  { x: 620, y: canvas.height - 25, width: 25, height: 25 }, //under the platform to get up
-  { x: 1000, y: canvas.height - 380, width: 25, height: 25 }, // the one after doing the 3 head hitters
-  { x: 840, y: canvas.height - 400, width: 25, height: 25 }, // the one in the box in the right side of the canvas
+  { x: 325, y: canvas.height - 25, width: 25, height: 25 }, //{ x: 450, y: canvas.height - 115, width: 25, height: 25 }, //above the first platform
+  { x: 350, y: canvas.height - 25, width: 25, height: 25 },//{ x: 595, y: canvas.height - 25, width: 25, height: 25 }, //under the platform to get up
+  { x: 375, y: canvas.height - 25, width: 25, height: 25 },//{ x: 1000, y: canvas.height - 380, width: 25, height: 25 }, // the one after doing the 3 head hitters
+  { x: 400, y: canvas.height - 25, width: 25, height: 25 },//{ x: 840, y: canvas.height - 400, width: 25, height: 25 }, // the one in the box in the right side of the canvas
 ];
 
  let powerUpSpeedBoostLvlThree = [
-  { x: 1055, y: canvas.height - 450, width: 25, height: 25 }, // the one after doing the 3 head hitters
+  { x: 425, y: canvas.height - 25, width: 25, height: 25 }, //{ x: 1055, y: canvas.height - 425, width: 25, height: 25 }, //the one after doing the 3 head hitters
+  { x: 450, y: canvas.height - 25, width: 25, height: 25 }, //{ x: 1055, y: canvas.height - 475, width: 25, height: 25 }, //the one above the box's roof
 ];
 
 function startGameLvlOne() {
