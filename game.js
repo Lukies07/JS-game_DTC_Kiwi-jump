@@ -44,7 +44,7 @@ let platformsLvlOne = [
   { x: 1040, y: canvas.height - 450,  width: 40, height: 20 } //the platform under the portal
 ];
 
-let kiwiSpiritLvlOne = {x: 0, y:canvas.height - 0, windth: 25, height: 25}; 
+let kiwiSpiritLvlOne = {x: 0, y:canvas.height - 0, width: 25, height: 25}; 
 
 let portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
 
@@ -68,7 +68,7 @@ let platformsLvlTwo = [
   { x: 1005, y: canvas.height -320, width: 75, height: 25 }, //platform under the portal
 ];
 
-let kiwiSpiritLvlTwo = {x: 0, y:canvas.height - 0, windth: 25, height: 25}; 
+let kiwiSpiritLvlTwo = {x: 0, y:canvas.height - 0, width: 25, height: 25}; 
 
 let portalLvlTwo = { x: 1040, y: canvas.height -370, width: 40, height: 50 };
 
@@ -328,15 +328,15 @@ function drawPlatforms() {
 }
 
 //this is for the pop up to tel ppl that the need kiwiSpirit to pick up the powerUp
-function displayPopup(message, color = "#ff0000", kiwiSpiritColor = "#ffa500") {
+function displayPopup(message, color, kiwiSpiritColor) {
   const popup = document.getElementById("popup");
-  popup.innerHTML = message.replace(/kiwi spirit/g, `<span style="color: ${kiwiSpiritColor}; font-weight: bold;">kiwi spirit</span>`);
+  popup.innerHTML = message;
   popup.style.backgroundColor = color;
   popup.style.display = "block";
 
   setTimeout(() => {
     popup.style.display = "none";
-  }, 2000); // Hide the popup after 2 seconds
+  }, 2000);
 }
 
 //chat gpt helped with the math for this function
@@ -370,8 +370,10 @@ function handleCollisions() {
   
   if (playerCollisionKiwiSpirit(player, kiwiSpirit)) {
     console.log('Player touched kiwi spirit');
+    displayPopup("You picked up kiwi spirit!", "lime", "#00ff00");
     player.hasKiwiSpirit = true;
     kiwiSpirit = {}; // Remove kiwi spirit by emptying its properties
+    displayPopup("You picked up kiwi spirit!", "lime", "#00ff00");
   }
 
   // Check for collision with power up jump boost
@@ -379,6 +381,7 @@ function handleCollisions() {
     powerUpJumpBoost.forEach((powerUpJump, powerUpJumpIndex) => {
       if (playerCollisionPowerUp(player, powerUpJump)) {
         if (player.hasKiwiSpirit) {
+          displayPopup("You picked up jump boost!", "lime", "#00ff00"); 
           player.jumpForce += 1;
           powerUpJumpBoost = powerUpJumpBoost.filter((_, index) => index !== powerUpJumpIndex);
           console.log(player.jumpForce);
@@ -394,6 +397,7 @@ function handleCollisions() {
     powerUpSpeedBoost.forEach((powerUpSpeed, powerUpSpeedIndex) => {
       if (playerCollisionPowerUp(player, powerUpSpeed)) {
         if (player.hasKiwiSpirit) {
+          displayPopup("You picked up speed boost!", "lime", "#00ff00");
           player.speed += 0.5;
           powerUpSpeedBoost = powerUpSpeedBoost.filter((_, index) => index !== powerUpSpeedIndex);
           console.log(player.speed);
@@ -403,13 +407,7 @@ function handleCollisions() {
       } 
     });
   }
-
- if (playerCollisionKiwiSpirit(player, kiwiSpirit)) {
-  console.log('Player touched kiwi spirit');
-  player.hasKiwiSpirit = true;
-  kiwiSpirit = {}; // Remove kiwi spirit by emptying its properties
-}
-
+  
 
  if (playerCollisionPortal(player, portal)) {
   console.log('player touched portal');
@@ -421,7 +419,7 @@ function handleCollisions() {
 function playerUpdate() {
 
   if (!player.isJumping) {
-    player.velocityY += gravity;
+    player.velocityY += gravity;  
   } else {
     player.velocityY += gravity;
   }
