@@ -121,15 +121,24 @@ let platformsLvlThree = [
   { x: 175, y: canvas.height - 250, width: 25, height: 200 }, //the wall that makes the player go down as
   { x: 175, y: canvas.height - 275, width: 55, height: 25 }, //the tiny roof above the wall that forces the player to go all the way down
   { x: 125, y: canvas.height - 25, width: 80, height: 25 }, //the lowest platform in the rectangle on the left  
-  { x: 30, y: canvas.height - 100, width: 25, height: 25 }, //first tiny square
-  { x: 40, y: canvas.height - 330, width: 25, height: 25 }, //second tiny square
+  { x: 0, y: canvas.height - 100, width: 25, height: 25 }, //first tiny square
+  { x: 42, y: canvas.height - 325, width: 25, height: 25 }, //second tiny square
   { x: 50, y: canvas.height - 410, width: 120, height: 25 }, //roof that the player has to hit to get onto second small square
   { x: 145, y: canvas.height - 650, width: 25, height: 240 }, //the wall on the right side of the head hitter
-  { x: 0, y: canvas.height - 580, width: 75, height: 25 }, //the first of the 2 platforms that the player has to go through
+  { x: 0, y: canvas.height - 580, width: 70, height: 25 }, //the first of the 2 platforms that the player has to go through
   { x: 100, y: canvas.height - 580, width: 45, height: 25 }, //the second of the 2 platforms that the player has to go through
   { x: 170, y: canvas.height - 495, width: 910, height: 20 }, //the long roof that stops player from easily getting to the second part of the level
 
-  { x: 230, y: canvas.height - 600, width: 850, height: 25}, //9x
+  { x: 200, y: canvas.height - 720, width: 25, height: 75}, //the top wall on the left of the maze
+  { x: 200, y: canvas.height - 620, width: 25, height: 125}, //the bottom wall on the left of the maze
+  { x: 225, y: canvas.height - 720, width: 25, height: 75}, //the 3 block tall stick, stuck on the left side of maze
+  { x: 300, y: canvas.height - 720, width: 125, height: 25}, //the platform that is 3 blocks from maze entrance
+  { x: 275, y: canvas.height - 695, width: 50, height: 25}, //the platform one down and one back to the platform on the prev line
+  { x: 225, y: canvas.height - 620, width: 100, height: 25}, //the platorm that the player walks on first when entering the maze
+  { x: 275, y: canvas.height - 645, width: 50, height: 25}, //the 2 wide platform that is 3 blocks after entrance and 1 up
+  { x: 300, y: canvas.height - 595, width: 25, height: 25}, //the 1x1 under the first platform that the player walks on
+  { x: 350, y: canvas.height - 670, width: 25, height: 100}, //the 4 block long wall going down
+
 
 ];
 
