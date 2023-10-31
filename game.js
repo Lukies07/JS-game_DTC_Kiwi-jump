@@ -83,6 +83,7 @@ let powerUpSpeedBoostLvlTwo = [
 
 //level 3
 let platformsLvlThree = [
+  { x: 0, y: canvas.height - 750, width: 1080, height: 30 }, //the roof to make the player hits its head when it tries to escape canvas
   { x: 450, y: canvas.height - 90, width: 50, height: 25 }, //first floating platform the one with the power up on it 
   { x: 450, y: canvas.height - 180, width: 50, height: 25 }, //second platform, the one above the first platform
   { x: 450, y: canvas.height - 270, width: 50, height: 25 }, //third platform above the second platform
@@ -113,19 +114,28 @@ let platformsLvlThree = [
   { x: 780, y: canvas.height - 255, width: 15, height: 40 }, //Second tiny pole to jump over
   { x: 675, y: canvas.height - 335, width: 25, height: 15 }, //the tiny platform on the right of the left wall of the box
 
-  { x: 230, y: canvas.height - 600, width: 25, height: 350 }, // the top wall on the left that the player has to go through
+  { x: 230, y: canvas.height - 475, width: 25, height: 225 }, // the top wall on the left that the player has to go through
   { x: 230, y: canvas.height - 200, width: 25, height: 200 }, //the bottom wal on the left that the player has to jump through
-  { x: 255, y: canvas.height - 375, width: 150, height: 25 }, //the platform stopping player from easily getting thru gap on the left side
+  { x: 255, y: canvas.height - 382, width: 125, height: 55 }, //the platform stopping player from easily getting thru gap on the left side
   { x: 425, y: canvas.height - 180, width: 25, height: 115 }, //the wall that stops player from getting throught the gap from the first platform
-  { x: 100, y: canvas.height - 100, width: 50, height: 25 }, // the platform down low on the left
-  { x: 120, y: canvas.height - 200, width: 50, height: 25 },
-  { x: 20, y: canvas.height - 400, width: 50, height: 25 },
+  { x: 175, y: canvas.height - 250, width: 25, height: 200 }, //the wall that makes the player go down as
+  { x: 175, y: canvas.height - 275, width: 55, height: 25 }, //the tiny roof above the wall that forces the player to go all the way down
+  { x: 125, y: canvas.height - 25, width: 80, height: 25 }, //the lowest platform in the rectangle on the left  
+  { x: 30, y: canvas.height - 100, width: 25, height: 25 }, //first tiny square
+  { x: 40, y: canvas.height - 330, width: 25, height: 25 }, //second tiny square
+  { x: 50, y: canvas.height - 410, width: 120, height: 25 }, //roof that the player has to hit to get onto second small square
+  { x: 145, y: canvas.height - 650, width: 25, height: 240 }, //the wall on the right side of the head hitter
+  { x: 0, y: canvas.height - 580, width: 75, height: 25 }, //the first of the 2 platforms that the player has to go through
+  { x: 100, y: canvas.height - 580, width: 45, height: 25 }, //the second of the 2 platforms that the player has to go through
+  { x: 170, y: canvas.height - 495, width: 910, height: 20 }, //the long roof that stops player from easily getting to the second part of the level
+
+  { x: 230, y: canvas.height - 600, width: 850, height: 25}, //9x
 
 ];
 
 let kiwiSpiritLvlThree = { x: 300, y: canvas.height - 25, width: 25, height: 25 }; //{ x: 1055, y: canvas.height - 330, width: 25, height: 25 };
 
-let portalLvlThree = {x: 0, y: canvas.height - 500, width: 40, height: 50};
+let portalLvlThree = {x: 1040, y: canvas.height - 720, width: 40, height: 50};
  
 let powerUpJumpBoostLvlThree = [
   { x: 325, y: canvas.height - 25, width: 25, height: 25 }, //{ x: 450, y: canvas.height - 115, width: 25, height: 25 }, //above the first platform
