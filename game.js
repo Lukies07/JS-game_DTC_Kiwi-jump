@@ -1,6 +1,15 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+const restartButton = document.getElementById("restartButton");
+const playerImage = new Image();
+playerImage.src = 'path/to/your/image.png'; // Replace with the actual path to your image
+
+
+restartButton.addEventListener("click", function() {
+  restartGame();
+});
+
 canvas.width = 1080;
 canvas.height = 720;
 
@@ -23,6 +32,7 @@ let player = {
   hasKiwiSpirit: false
 };
 
+let currentAnimationFrame = null;
 let gravity = 0.5;
 let touchingPortal = false
 
@@ -312,6 +322,17 @@ function handleKeys() {
   }
 }
 
+function restartGame() {
+  cancelAnimationFrame(currentAnimationFrame); // Cancel the current animation frame
+  if (level === 1) {
+    startGameLvlOne();
+  } else if (level === 2) {
+    startGameLvlTwo();
+  } else if (level === 3) {
+    startGameLvlThree();
+  }
+}
+
 
 function playerCollision(player, platform) {
   return (
@@ -392,8 +413,8 @@ function drawPlayer() {
   player.alpha = playerAlpha;
   ctx.globalAlpha = player.alpha;
 
-  ctx.fillStyle = 'blue';
-  ctx.fillRect(player.x, player.y, player.width, player.height);  
+  // Draw the image instead of a blue rectangle
+  ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
 }
 
 function drawPlatforms() {
@@ -545,7 +566,7 @@ function gameLoop() {
     drawPlayer();
     handleKeys(); 
     playerUpdate();
-    requestAnimationFrame(gameLoop);
+    currentAnimationFrame = requestAnimationFrame(gameLoop);
   }
 }
 
