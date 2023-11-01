@@ -2,9 +2,15 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const restartButton = document.getElementById("restartButton");
-const playerImage = new Image();
-playerImage.src = 'path/to/your/image.png'; // Replace with the actual path to your image
 
+const jumpBoostImage = new Image();
+jumpBoostImage.src = 'jump_boost.png';
+
+const speedBoostImage = new Image();
+speedBoostImage.src = 'speed_boost.png';
+
+const kiwiSpiritImage = new Image();
+kiwiSpiritImage.src = 'kiwi_spirit.png';
 
 restartButton.addEventListener("click", function() {
   restartGame();
@@ -54,7 +60,7 @@ let platformsLvlOne = [
   { x: 1040, y: canvas.height - 450,  width: 40, height: 20 } //the platform under the portal
 ];
 
-let kiwiSpiritLvlOne = {x: 0, y:canvas.height - 25, width: 25, height: 25}; 
+let kiwiSpiritLvlOne = {x: 0, y:canvas.height - 40, width: 40, height: 40}; 
 
 let portalLvlOne = {x: 1040, y: canvas.height - 500,  width: 40, height: 50};
 
@@ -78,7 +84,7 @@ let platformsLvlTwo = [
   { x: 1005, y: canvas.height -320, width: 75, height: 25 }, //platform under the portal
 ];
 
-let kiwiSpiritLvlTwo = { x: 275, y: canvas.height -175, width: 25, height: 25 }; 
+let kiwiSpiritLvlTwo = { x: 285, y: canvas.height -175, width: 40, height: 40 }; 
 
 let portalLvlTwo = { x: 1040, y: canvas.height -370, width: 40, height: 50 };
 
@@ -188,7 +194,7 @@ let platformsLvlThree = [
   { x: 1025, y: canvas.height - 645, width: 15, height: 150}, //bottom section of right wall
 ];
 
-let kiwiSpiritLvlThree = { x: 1055, y: canvas.height - 330, width: 25, height: 25 };
+let kiwiSpiritLvlThree = { x: 1030, y: canvas.height - 350, width: 40, height: 40 };
 
 let portalLvlThree = {x: 1040, y: canvas.height - 545, width: 40, height: 50};
  
@@ -384,16 +390,18 @@ function isOnPlatform() {
 }
 
 function drawPowerUpJumpBoost() {
-  ctx.fillStyle = 'yellow';
   for (let powerUpJump of powerUpJumpBoost) {
-    ctx.fillRect(powerUpJump.x, powerUpJump.y, powerUpJump.width, powerUpJump.height);
+    powerUpJump.alpha = powerUpJump.Alpha;
+    ctx.globalAlpha = powerUpJump.alpha;
+    ctx.drawImage (jumpBoostImage, powerUpJump.x, powerUpJump.y, powerUpJump.width, powerUpJump.height);
   }
 }
 
 function drawPowerUpSpeedBoost() {
-  ctx.fillStyle = 'green';
   for (let powerUpSpeed of powerUpSpeedBoost) {
-    ctx.fillRect(powerUpSpeed.x, powerUpSpeed.y, powerUpSpeed.width, powerUpSpeed.height);
+    powerUpSpeed.alpha = powerUpSpeed.Alpha;
+    ctx.globalAlpha = powerUpSpeed.alpha;
+    ctx.drawImage(speedBoostImage, powerUpSpeed.x, powerUpSpeed.y, powerUpSpeed.width, powerUpSpeed.height);
   }
 }
 
@@ -404,17 +412,27 @@ function drawPortal() {
 
 function drawKiwiSpirit() {
   if (!player.hasKiwiSpirit) {
-    ctx.fillStyle = 'orange';
-    ctx.fillRect(kiwiSpirit.x, kiwiSpirit.y, kiwiSpirit.width, kiwiSpirit.height);
+    kiwiSpirit.alpha = kiwiSpirit.Alpha;
+    //chat gpt helped me with getting rounded edges
+    const kiwiSpiritRadius = 10;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(kiwiSpirit.x + kiwiSpiritRadius, kiwiSpirit.y);
+    ctx.arcTo(kiwiSpirit.x + kiwiSpirit.width, kiwiSpirit.y, kiwiSpirit.x + kiwiSpirit.width, kiwiSpirit.y + kiwiSpirit.height, kiwiSpiritRadius);
+    ctx.arcTo(kiwiSpirit.x + kiwiSpirit.width, kiwiSpirit.y + kiwiSpirit.height, kiwiSpirit.x, kiwiSpirit.y + kiwiSpirit.height, kiwiSpiritRadius);
+    ctx.arcTo(kiwiSpirit.x, kiwiSpirit.y + kiwiSpirit.height, kiwiSpirit.x, kiwiSpirit.y, kiwiSpiritRadius);
+    ctx.arcTo(kiwiSpirit.x, kiwiSpirit.y, kiwiSpirit.x + kiwiSpirit.width, kiwiSpirit.y, kiwiSpiritRadius);
+    ctx.closePath();
+    ctx.clip();
+    ctx.drawImage(kiwiSpiritImage, kiwiSpirit.x, kiwiSpirit.y, kiwiSpirit.width, kiwiSpirit.height);
+    ctx.restore();
   }
 }
 
 function drawPlayer() {
-  player.alpha = playerAlpha;
-  ctx.globalAlpha = player.alpha;
-
-  // Draw the image instead of a blue rectangle
-  ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(player.x, player.y, player.width, player.height);
 }
 
 function drawPlatforms() {
