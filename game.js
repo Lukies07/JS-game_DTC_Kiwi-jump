@@ -132,30 +132,66 @@ let platformsLvlThree = [
   { x: 200, y: canvas.height - 720, width: 25, height: 75}, //the top wall on the left of the maze
   { x: 200, y: canvas.height - 620, width: 25, height: 125}, //the bottom wall on the left of the maze
   { x: 225, y: canvas.height - 720, width: 25, height: 75}, //the 3 block tall stick, stuck on the left side of maze
-  { x: 300, y: canvas.height - 720, width: 125, height: 25}, //the platform that is 3 blocks from maze entrance
+  { x: 300, y: canvas.height - 720, width: 150, height: 25}, //the platform that is 3 blocks from maze entrance
   { x: 275, y: canvas.height - 695, width: 50, height: 25}, //the platform one down and one back to the platform on the prev line
   { x: 225, y: canvas.height - 620, width: 100, height: 25}, //the platorm that the player walks on first when entering the maze
   { x: 275, y: canvas.height - 645, width: 50, height: 25}, //the 2 wide platform that is 3 blocks after entrance and 1 up
   { x: 300, y: canvas.height - 595, width: 25, height: 25}, //the 1x1 under the first platform that the player walks on
   { x: 350, y: canvas.height - 670, width: 25, height: 100}, //the 4 block long wall going down
-
-
+  { x: 400, y: canvas.height - 695, width: 25, height: 100}, //the 4 block wall going down, 2 blocks ahead and 1 up from the prev line
+  { x: 425, y: canvas.height - 620, width: 50, height: 25}, //the 2 block long plaform extending off the wall from the prev line
+  { x: 350, y: canvas.height - 570, width: 125, height: 25}, //the 5 block long pipe on the bottom of the 4 bblock tall wall
+  { x: 250, y: canvas.height - 545, width: 150, height: 25}, //im getting tired of describing these platforms
+  { x: 475, y: canvas.height - 595, width: 50, height: 75}, //2x3 rectangle
+  { x: 450, y: canvas.height - 595, width: 25, height: 25}, //1x1 behind the 2x3
+  { x: 250, y: canvas.height - 570, width: 25, height: 25}, //1x1 by the platform that the palyer takes to go backwards
+  { x: 425, y: canvas.height - 520, width: 25, height: 25}, //1x1 at the bottom of the maze in the middle
+  { x: 450, y: canvas.height - 670, width: 75, height: 25}, //1x3 platfrom near the middle top of the maze
+  { x: 475, y: canvas.height - 695, width: 175, height: 25}, //1x7 long platform near top middle of maze
+  { x: 500, y: canvas.height - 645, width: 25, height: 25}, //1x1 under the 2x2 looking are formed by the pervious lines
+  { x: 550, y: canvas.height - 645, width: 25, height: 25}, //1x1 before the 2 tall walls going downwards
+  { x: 575, y: canvas.height - 645, width: 25, height: 100}, //1x4 going down further one
+  { x: 550, y: canvas.height - 595, width: 25, height: 100}, //1x4 going down closer one
+  { x: 625, y: canvas.height - 670, width: 50, height: 25}, //2x1
+  { x: 675, y: canvas.height - 695, width: 25, height: 100}, //1x4 going down after the 2
+  { x: 625, y: canvas.height - 620, width: 50, height: 25}, //2x1 that is slightly lower
+  { x: 625, y: canvas.height - 595, width: 25, height: 100}, //1x4 going down to the ground
+  { x: 600, y: canvas.height - 520, width: 25, height: 25}, //the 1x1 one before the previous line (is on the ground)
+  { x: 650, y: canvas.height - 570, width: 25, height: 25}, //first of the 3 1x1s that make an upside down triangle
+  { x: 675, y: canvas.height - 520, width: 25, height: 25}, //second of the 3 1x1s that make an upside down triangle
+  { x: 700, y: canvas.height - 570, width: 25, height: 25}, //third of the 3 1x1s  that make an upside down triangle
+  { x: 725, y: canvas.height - 695, width: 25, height: 175}, //first 1x7 going from 1 under the roof, near end of maze
+  { x: 775, y: canvas.height - 695, width: 25, height: 175}, //second 1x7 going from 1 under the roof, near end of maze
+  { x: 750, y: canvas.height - 545, width: 25, height: 25}, //small platform inbtween the 2 1x7s
+  { x: 800, y: canvas.height - 720, width: 25, height: 50}, //the small 1x2 hanging from roof
+  { x: 825, y: canvas.height - 645, width: 25, height: 150}, //the 1x6 going to the ground
+  { x: 850, y: canvas.height - 695, width: 25, height: 75}, //the first 1x3 going down
+  { x: 875, y: canvas.height - 695, width: 50, height: 25}, //the 1x2 going right
+  { x: 900, y: canvas.height - 645, width: 25, height: 75}, //the second 1x3 going down
+  { x: 875, y: canvas.height - 595, width: 25, height: 75}, //third 1x3 going down (this one is more to the left but lower down the the on on the prev line)
+  { x: 900, y: canvas.height - 545, width: 75, height: 25}, //3x1 going left 
+  { x: 950, y: canvas.height - 695, width: 25, height: 150}, //1x6 going down
+  { x: 975, y: canvas.height - 695, width: 50, height: 25}, //2x1 goiing to the wall on the right of maze
+  { x: 1000, y: canvas.height - 645, width: 25, height: 25}, //1x1 on right wall
+  { x: 1000, y: canvas.height - 595, width: 25, height: 100}, //the 1x4 going down (on the right wall)
+  { x: 1025, y: canvas.height - 720, width: 25, height: 50}, //top section of right wall
+  { x: 1025, y: canvas.height - 645, width: 15, height: 150}, //bottom section of right wall
 ];
 
-let kiwiSpiritLvlThree = { x: 300, y: canvas.height - 25, width: 25, height: 25 }; //{ x: 1055, y: canvas.height - 330, width: 25, height: 25 };
+let kiwiSpiritLvlThree = { x: 1055, y: canvas.height - 330, width: 25, height: 25 };
 
-let portalLvlThree = {x: 1040, y: canvas.height - 720, width: 40, height: 50};
+let portalLvlThree = {x: 1040, y: canvas.height - 545, width: 40, height: 50};
  
 let powerUpJumpBoostLvlThree = [
-  { x: 325, y: canvas.height - 25, width: 25, height: 25 }, //{ x: 450, y: canvas.height - 115, width: 25, height: 25 }, //above the first platform
-  { x: 350, y: canvas.height - 25, width: 25, height: 25 },//{ x: 595, y: canvas.height - 25, width: 25, height: 25 }, //under the platform to get up
-  { x: 375, y: canvas.height - 25, width: 25, height: 25 },//{ x: 1000, y: canvas.height - 380, width: 25, height: 25 }, // the one after doing the 3 head hitters
-  { x: 400, y: canvas.height - 25, width: 25, height: 25 },//{ x: 840, y: canvas.height - 400, width: 25, height: 25 }, // the one in the box in the right side of the canvas
-];
+  { x: 450, y: canvas.height - 115, width: 25, height: 25 }, //above the first platform
+  { x: 595, y: canvas.height - 25, width: 25, height: 25 }, //under the platform to get up
+  { x: 1000, y: canvas.height - 380, width: 25, height: 25 }, // the one after doing the 3 head hitters
+  { x: 840, y: canvas.height - 400, width: 25, height: 25 }, // the one in the box in the right side of the canvas
+]
 
  let powerUpSpeedBoostLvlThree = [
-  { x: 425, y: canvas.height - 25, width: 25, height: 25 }, //{ x: 1055, y: canvas.height - 425, width: 25, height: 25 }, //the one after doing the 3 head hitters
-  { x: 450, y: canvas.height - 25, width: 25, height: 25 }, //{ x: 1055, y: canvas.height - 475, width: 25, height: 25 }, //the one above the box's roof
+  { x: 1055, y: canvas.height - 425, width: 25, height: 25 }, //the one after doing the 3 head hitters
+  { x: 1055, y: canvas.height - 475, width: 25, height: 25 }, //the one above the box's roof
 ];
 
 function startGameLvlOne() {
