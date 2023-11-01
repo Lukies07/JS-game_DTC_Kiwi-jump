@@ -431,6 +431,8 @@ function drawKiwiSpirit() {
 }
 
 function drawPlayer() {
+  player.alpha = playerAlpha;
+  ctx.globalAlpha = player.alpha;
   ctx.fillStyle = 'blue';
   ctx.fillRect(player.x, player.y, player.width, player.height);
 }
@@ -486,7 +488,6 @@ function handleCollisions() {
   
   if (playerCollisionKiwiSpirit(player, kiwiSpirit)) {
     console.log('Player touched kiwi spirit');
-    displayPopup("You picked up kiwi spirit!", "lime", "#00ff00");
     player.hasKiwiSpirit = true;
     kiwiSpirit = {}; // Remove kiwi spirit by emptying its properties
     displayPopup("You picked up kiwi spirit!", "lime", "#00ff00");
