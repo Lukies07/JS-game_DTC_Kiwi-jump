@@ -2,6 +2,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const restartButton = document.getElementById("restartButton");
+restartButton.classList.add("hidden");
 
 const jumpBoostImage = new Image();
 jumpBoostImage.src = 'jump_boost.png';
@@ -68,7 +69,7 @@ let powerUpJumpBoostLvlOne = [
   { x: 55, y: canvas.height - 175,  width: 25, height: 25 },
 ];
 let powerUpSpeedBoostLvlOne = [
-  
+  //empty cause there is none, and if i didnt have the variable/array the game would break
 ];
 
 //level 2
@@ -99,6 +100,8 @@ let powerUpSpeedBoostLvlTwo = [
 
 //level 3
 let platformsLvlThree = [
+
+  //main platforms
   { x: 0, y: canvas.height - 750, width: 1080, height: 30 }, //the roof to make the player hits its head when it tries to escape canvas
   { x: 450, y: canvas.height - 90, width: 50, height: 25 }, //first floating platform the one with the power up on it 
   { x: 450, y: canvas.height - 180, width: 50, height: 25 }, //second platform, the one above the first platform
@@ -106,6 +109,7 @@ let platformsLvlThree = [
   { x: 450, y: canvas.height - 360, width: 50, height: 25 }, //fourth platform above the second platform
   { x: 570, y: canvas.height - 430, width: 25, height: 430 }, //tall wall on the right of where the player spawns
 
+  //the left side bottom platfroms
   { x: 595, y: canvas.height - 75, width: 50, height: 25 }, //platform to help player get back up
   { x: 650, y: canvas.height - 150, width: 50, height: 25 }, //first head hitterplatform
   { x: 765, y: canvas.height - 150, width: 50, height: 25 }, //second head hitterplatform
@@ -120,6 +124,7 @@ let platformsLvlThree = [
   { x: 1030, y: canvas.height - 425, width: 15, height: 75 }, //the floating wall that stops the player from getting speed boost
   { x: 625, y: canvas.height - 300, width: 25, height: 15 }, // the small platform that the player uses to get back upover the tall stick on the right side of where the player spawns 
 
+  //the box on the right side of canvas
   { x: 915, y: canvas.height - 390, width: 15, height: 160 }, //the stick that the player has to do a head hitter jump to get over
   { x: 715, y: canvas.height - 375, width: 150, height: 15 }, //the long platform under the jump boost
   { x: 865, y: canvas.height - 425, width: 15, height: 65, }, //the wall blocking player from just easily getting the jump boost
@@ -130,6 +135,7 @@ let platformsLvlThree = [
   { x: 780, y: canvas.height - 255, width: 15, height: 40 }, //Second tiny pole to jump over
   { x: 675, y: canvas.height - 335, width: 25, height: 15 }, //the tiny platform on the right of the left wall of the box
 
+  //the left sode of canvas
   { x: 230, y: canvas.height - 475, width: 25, height: 225 }, // the top wall on the left that the player has to go through
   { x: 230, y: canvas.height - 200, width: 25, height: 200 }, //the bottom wal on the left that the player has to jump through
   { x: 255, y: canvas.height - 382, width: 125, height: 55 }, //the platform stopping player from easily getting thru gap on the left side
@@ -145,6 +151,7 @@ let platformsLvlThree = [
   { x: 100, y: canvas.height - 580, width: 45, height: 25 }, //the second of the 2 platforms that the player has to go through
   { x: 170, y: canvas.height - 495, width: 910, height: 20 }, //the long roof that stops player from easily getting to the second part of the level
 
+  //the maze
   { x: 200, y: canvas.height - 720, width: 25, height: 75}, //the top wall on the left of the maze
   { x: 200, y: canvas.height - 620, width: 25, height: 125}, //the bottom wall on the left of the maze
   { x: 225, y: canvas.height - 720, width: 25, height: 75}, //the 3 block tall stick, stuck on the left side of maze
@@ -211,14 +218,15 @@ let powerUpJumpBoostLvlThree = [
 ];
 
 function startGameLvlOne() {
+  restartButton.classList.remove("hidden"); //make restart button a appear by removing the hidden clas
   resetVars();
-  player.x = canvas.width/2 - player.width;
-  player.y = canvas.height - player.height;
-  kiwiSpirit = kiwiSpiritLvlOne
-  powerUpSpeedBoost = powerUpSpeedBoostLvlOne
-  powerUpJumpBoost = powerUpJumpBoostLvlOne; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
-  portal = portalLvlOne;
-  platforms = platformsLvlOne;
+  player.x = canvas.width/2 - player.width; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
+  player.y = canvas.height - player.height; //same goes for this one
+  kiwiSpirit = kiwiSpiritLvlOne //same goes for this one
+  powerUpSpeedBoost = powerUpSpeedBoostLvlOne //same goes for this one
+  powerUpJumpBoost = powerUpJumpBoostLvlOne;  //same goes for this one
+  portal = portalLvlOne; //same goes for this one
+  platforms = platformsLvlOne; //same goes for this one
     console.log("Game started!");
     level = 1;
     checkCondition();
@@ -227,14 +235,15 @@ function startGameLvlOne() {
 }
 
 function startGameLvlTwo() {
+  restartButton.classList.remove("hidden"); //make restart button a appear by removing the hidden clas
   resetVars();
-  player.x = canvas.width/2 - player.width;
-  player.y = canvas.height - player.height;
-  kiwiSpirit = kiwiSpiritLvlTwo
-  powerUpSpeedBoost = powerUpSpeedBoostLvlTwo
-  powerUpJumpBoost = powerUpJumpBoostLvlTwo; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
-  portal = portalLvlTwo;
-  platforms = platformsLvlTwo;
+  player.x = canvas.width/2 - player.width; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
+  player.y = canvas.height - player.height; //same goes for this one
+  kiwiSpirit = kiwiSpiritLvlTwo //same goes for this one
+  powerUpSpeedBoost = powerUpSpeedBoostLvlTwo //same goes for this one
+  powerUpJumpBoost = powerUpJumpBoostLvlTwo; //same goes for this one
+  portal = portalLvlTwo; //same goes for this one
+  platforms = platformsLvlTwo; //same goes for this one
     console.log("Game started!");
     level = 2;
     checkCondition();
@@ -243,14 +252,15 @@ function startGameLvlTwo() {
 }
   
 function startGameLvlThree() {
+  restartButton.classList.remove("hidden"); //make restart button a appear by removing the hidden clas
   resetVars();
-  player.x = canvas.width/2 - player.width;
-  player.y = canvas.height - player.height;
-  kiwiSpirit = kiwiSpiritLvlThree;
-  powerUpSpeedBoost = powerUpSpeedBoostLvlThree
-  powerUpJumpBoost = powerUpJumpBoostLvlThree; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
-  portal = portalLvlThree;
-  platforms = platformsLvlThree;
+  player.x = canvas.width/2 - player.width; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
+  player.y = canvas.height - player.height; //same goes for this one
+  kiwiSpirit = kiwiSpiritLvlThree; //same goes for this one
+  powerUpSpeedBoost = powerUpSpeedBoostLvlThree //same goes for this one
+  powerUpJumpBoost = powerUpJumpBoostLvlThree; //same goes for this one
+  portal = portalLvlThree; //same goes for this one
+  platforms = platformsLvlThree; //same goes for this one
     console.log("Game started!");
     level = 3;
     checkCondition();
