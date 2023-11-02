@@ -9,31 +9,6 @@
 <body>
     <canvas id='gameCanvas'></canvas>
 
-    <div id="gameInfoContainer" style="display: none;">
-
-        <h3 id="gameInfo">Game Information:</h3>
-
-        <img id="jumpBoostImg" src="jump_boost.png" alt="speed_boostImg">
-        <div id="jumpBoostDescription">
-            The jump boost increases your jump<br>strength, allowing you to jump higher
-        </div>
-
-        <img id="speedBoostImg" src="speed_boost.png" alt="speed_boostImg">
-        <div id="speedBoostDescription">
-            The speed boost Increases<br>your speed, this allows you to<br>travel faster
-        </div>
-
-        <img id="kiwiSpiritImg" src="kiwi_spirit.png" alt="kiwi_spiritImg">
-        <div id="kiwiSpiritDescription">
-            The kiwi spirit allows you to<br>harness the power of picking up<br>power ups, you need to collect it<br>before you can pick up<br>any other power ups<br><br>
-            Important to know:<br><br>
-            You keep the buff of the power ups<br>for the entirity of the level<br><br>
-            You lose everything when restarting<br> the level by reloading<br>or pressing restart
-        
-        </div>
-
-    </div>
-
     <div id="popup" style="display: none;"></div>
 
     <button id="restartButton" class="restartButton">Restart Game</button>
@@ -47,5 +22,32 @@
     </div>
     
     <script src="game.js"></script>
+
+    <div id="gameInfoContainer" style="display: none;">
+
+        <h3 id="gameInfo">Game Information:</h3>
+
+        <div id="portalDescription">
+            The objective of the game is<br>to get to the purple portal<br>doing so means you have<br>beaten the level.
+        </div>
+
+        <img id="jumpBoostImg" src="jump_boost.png" alt="speed_boostImg">
+        <div id="jumpBoostDescription">
+            The jump boost increases your jump<br>strength, allowing you to jump higher.
+        </div>
+
+        <img id="speedBoostImg" src="speed_boost.png" alt="speed_boostImg">
+        <div id="speedBoostDescription">
+            The speed boost Increases<br>your speed, this allows you to<br>travel faster.
+        </div>
+
+        <img id="kiwiSpiritImg" src="kiwi_spirit.png" alt="kiwi_spiritImg">
+        <div id="kiwiSpiritDescription">
+            The kiwi spirit allows you to<br>harness the power of picking up<br>power ups, you need to collect it<br>before you can pick up<br>any other power ups.<br><br>
+            Important to know:<br><br>
+            You keep the buff of the power ups<br>for the entirity of the level.<br><br>
+            You lose everything when restarting<br> the level by reloading<br>or pressing restart.
+        </div>
+    </div>
 </body>
 </html>

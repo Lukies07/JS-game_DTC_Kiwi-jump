@@ -93,7 +93,7 @@ button {
     flex-direction: column; /* Change to column */
     align-items: center; 
     position: absolute;
-    top: 200px;
+    top: 180px;
     left: 10px;
     border: 2px solid black; /* Black border */
     background-color: rgb(225, 179, 139); /* Light blue background */
@@ -138,4 +138,9 @@ button {
 #kiwiSpiritDescription {
     font-family: sans-serif ;
     margin-bottom: 10px; /*space out the lines and image*/
+} 
+
+#portalDescription {
+    font-family: sans-serif ;
+    margin-bottom: 30px; /*space out the lines and image*/
 } 
