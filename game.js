@@ -13,6 +13,7 @@ speedBoostImage.src = 'speed_boost.png';
 const kiwiSpiritImage = new Image();
 kiwiSpiritImage.src = 'kiwi_spirit.png';
 
+
 restartButton.addEventListener("click", function() {
   restartGame();
 });
@@ -221,6 +222,7 @@ let powerUpJumpBoostLvlThree = [
 
 function startGameLvlOne() {
   restartButton.classList.remove("hidden"); //make restart button a appear by removing the hidden clas
+  showGameInfo();
   resetVars();
   player.x = canvas.width/2 - player.width; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   player.y = canvas.height - player.height; //same goes for this one
@@ -238,6 +240,7 @@ function startGameLvlOne() {
 
 function startGameLvlTwo() {
   restartButton.classList.remove("hidden"); //make restart button a appear by removing the hidden clas
+  showGameInfo();
   resetVars();
   player.x = canvas.width/2 - player.width; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   player.y = canvas.height - player.height; //same goes for this one
@@ -255,6 +258,7 @@ function startGameLvlTwo() {
   
 function startGameLvlThree() {
   restartButton.classList.remove("hidden"); //make restart button a appear by removing the hidden clas
+  showGameInfo();
   resetVars();
   player.x = canvas.width/2 - player.width; //setting it equal to its respective level makes it so i dont have to make seperate functions for all levels
   player.y = canvas.height - player.height; //same goes for this one
@@ -308,6 +312,10 @@ function checkCondition() {
     }
 }
 
+function showGameInfo() {
+  const gameInfoContainer = document.getElementById("gameInfoContainer");
+  gameInfoContainer.style.display = "flex";
+}
 
 function MainMenu() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);

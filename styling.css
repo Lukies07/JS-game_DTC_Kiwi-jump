@@ -14,12 +14,13 @@ Canvas {
     height: 90vh;
     background-color: lightgreen;
     border: 10px solid black;
-    border-radius: 10px;
+    border-radius: 20px;
+    position: relative; /* Add position: relative; */
 }
 
 h1 {
     text-decoration: underline;
-    font-family: 'Roboto', sans-serif;;
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 70px;
     text-shadow: 3px 3px 3px #000000;
@@ -86,3 +87,55 @@ button {
     border-radius: 10px;
 }
 
+
+#gameInfoContainer {
+    display: flex;
+    flex-direction: column; /* Change to column */
+    align-items: center; 
+    position: absolute;
+    top: 200px;
+    left: 10px;
+    border: 2px solid black; /* Black border */
+    background-color: rgb(225, 179, 139); /* Light blue background */
+    padding: 10px; /* Add padding for a cleaner look */
+    border-radius: 10px;
+}
+
+#gameInfo {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+#jumpBoostImg {
+    max-width: 50px;
+    max-height: 50px;
+    margin-bottom: 10px; /* Add margin to separate from the description */
+}
+
+#jumpBoostDescription {
+    margin-bottom: 10px; /*space out the lines and image*/
+    font-family: sans-serif ;
+}
+
+#speedBoostImg {
+    max-width: 50px;
+    max-height: 50px;
+    margin-bottom: 10px; /* Add margin to separate from the description */
+}
+
+#speedBoostDescription {
+    font-family: sans-serif ;
+    margin-bottom: 10px; /*space out the lines and image*/
+} 
+
+#kiwiSpiritImg {
+    max-width: 50px;
+    max-height: 50px;
+    margin-bottom: 10px; /* Add margin to separate from the description */
+}
+
+#kiwiSpiritDescription {
+    font-family: sans-serif ;
+    margin-bottom: 10px; /*space out the lines and image*/
+} 
