@@ -22,6 +22,7 @@ canvas.height = 720;
 
 let level = 0;
 
+//player propertiess
 let player = {
   x: undefined,
   y: undefined, 
@@ -35,10 +36,11 @@ let player = {
   isMovingRight: false,
   isFading: false,
   fadeDuration: 2000, // 2000 milliseconds (2 seconds)
-  alpha: 1.0,
+  alpha: 1.0, //transparency basically
   hasKiwiSpirit: false
 };
 
+//some variables
 let currentAnimationFrame = null;
 let gravity = 0.5;
 let touchingPortal = false
@@ -293,7 +295,8 @@ function resetVars() {
   
   console.log('reset vars')
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
+} //end of reset vars function
+
 
 function checkCondition() {
     const titleScreen = document.getElementById("titleScreen");
@@ -305,10 +308,10 @@ function checkCondition() {
     }
 }
 
+
 function MainMenu() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
 
 let keys = {};
 
@@ -349,7 +352,7 @@ function restartGame() {
   }
 }
 
-
+//the following functions check for collisions and then when collision is true an action can be done
 function playerCollision(player, platform) {
   return (
     player.x < platform.x + platform.width &&
@@ -399,6 +402,7 @@ function isOnPlatform() {
   return false;
 }
 
+//all the drawing functions
 function drawPowerUpJumpBoost() {
   for (let powerUpJump of powerUpJumpBoost) {
     powerUpJump.alpha = powerUpJump.Alpha;
@@ -423,6 +427,7 @@ function drawPortal() {
 function drawKiwiSpirit() {
   if (!player.hasKiwiSpirit) {
     kiwiSpirit.alpha = kiwiSpirit.Alpha;
+
     //chat gpt helped me with getting rounded edges
     const kiwiSpiritRadius = 10;
 
@@ -467,7 +472,8 @@ function displayPopup(message, color, kiwiSpiritColor) {
   }, 2000);
 }
 
-//chat gpt helped with the math for this function
+
+//chat gpt helped with the math for this function //this funcion tests for collisions and then decides what to do when a collision is detected
 function handleCollisions() {
   for (let platform of platforms) {
     if (playerCollision(player, platform)) {
@@ -534,16 +540,15 @@ function handleCollisions() {
       } 
     });
   }
-  
 
  if (playerCollisionPortal(player, portal)) {
   console.log('player touched portal');
   touchingPortal = true;
  }
-}
+} //end of collision function
 
 
-function playerUpdate() {
+function playerUpdate() { //this just updates the player 
 
   if (!player.isJumping) {
     player.velocityY += gravity;  
@@ -553,6 +558,7 @@ function playerUpdate() {
 
   player.y += player.velocityY;
 
+  //part of the calculation for when player is jumping
   if (player.y >= canvas.height - player.height) {
     player.y = canvas.height - player.height;
     player.isJumping = false;
