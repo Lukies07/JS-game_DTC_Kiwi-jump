@@ -522,12 +522,12 @@ function handleCollisions() {
     powerUpJumpBoost.forEach((powerUpJump, powerUpJumpIndex) => {
       if (playerCollisionPowerUp(player, powerUpJump)) {
         if (player.hasKiwiSpirit) {
-          displayPopup("You picked up jump boost!", "lime", "#00ff00"); 
+          displayPopup("You picked up jump boost!", "lime", "#00ff00"); //it took me ages to get the colour to work
           player.jumpForce += 1;
           powerUpJumpBoost = powerUpJumpBoost.filter((_, index) => index !== powerUpJumpIndex);
           console.log(player.jumpForce);
         } else {
-          displayPopup("You need kiwi spirit to obtain a jump boost!", "#ff5100cd", "#00ff00");
+          displayPopup("You need kiwi spirit to obtain a jump boost!", "orange", "#00ff00"); //it took me ages to get the colour to work
         }
       }
     });
@@ -538,12 +538,12 @@ function handleCollisions() {
     powerUpSpeedBoost.forEach((powerUpSpeed, powerUpSpeedIndex) => {
       if (playerCollisionPowerUp(player, powerUpSpeed)) {
         if (player.hasKiwiSpirit) {
-          displayPopup("You picked up speed boost!", "lime", "#00ff00");
+          displayPopup("You picked up speed boost!", "lime", "#00ff00"); //it took me ages to get the colour to work
           player.speed += 0.5;
           powerUpSpeedBoost = powerUpSpeedBoost.filter((_, index) => index !== powerUpSpeedIndex);
           console.log(player.speed);
         } else {
-          displayPopup("You need kiwi spirit to obtain a jump boost!", "#ff5100cd", "#00ff00");
+          displayPopup("You need kiwi spirit to obtain a jump boost!", "orange", "#00ff00"); //it took me ages to get the colour to work
         }
       } 
     });
