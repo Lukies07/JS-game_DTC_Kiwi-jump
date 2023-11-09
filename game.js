@@ -1,6 +1,7 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+
 const restartButton = document.getElementById("restartButton");
 restartButton.classList.add("hidden");
 
@@ -138,7 +139,7 @@ let platformsLvlThree = [
   { x: 780, y: canvas.height - 255, width: 15, height: 40 }, //Second tiny pole to jump over
   { x: 675, y: canvas.height - 335, width: 25, height: 15 }, //the tiny platform on the right of the left wall of the box
 
-  //the left sode of canvas
+  //the left side of canvas
   { x: 230, y: canvas.height - 475, width: 25, height: 225 }, // the top wall on the left that the player has to go through
   { x: 230, y: canvas.height - 200, width: 25, height: 200 }, //the bottom wal on the left that the player has to jump through
   { x: 255, y: canvas.height - 382, width: 125, height: 55 }, //the platform stopping player from easily getting thru gap on the left side
@@ -209,7 +210,7 @@ let kiwiSpiritLvlThree = { x: 1030, y: canvas.height - 350, width: 40, height: 4
 let portalLvlThree = {x: 1040, y: canvas.height - 545, width: 40, height: 50};
  
 let powerUpJumpBoostLvlThree = [
-  { x: 450, y: canvas.height - 115, width: 25, height: 25 }, //above the first platform
+  { x: 450, y: canvas.height - 150, width: 25, height: 25 }, //above the first platform
   { x: 595, y: canvas.height - 25, width: 25, height: 25 }, //under the platform to get up
   { x: 1000, y: canvas.height - 380, width: 25, height: 25 }, // the one after doing the 3 head hitters
   { x: 840, y: canvas.height - 400, width: 25, height: 25 }, // the one in the box in the right side of the canvas
@@ -583,13 +584,14 @@ function playerUpdate() { //this just updates the player
     player.x -= player.speed;
   }
 
-  if(playerAlpha <= 0) {
+  if (playerAlpha <= 0) {
+    restartButton.classList.add("hidden");
     resetVars();
     level = 0;
     checkCondition();
     touchingPortal = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  };  
+};
 
   if (touchingPortal == true) {
     playerAlpha -= 0.01;

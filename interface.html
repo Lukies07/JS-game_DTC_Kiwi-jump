@@ -20,15 +20,20 @@
         <button onclick="startGameLvlTwo()">Level 2</button>
         <button onclick="startGameLvlThree()">Level 3</button>
     </div>
-    
-    <script src="game.js"></script>
 
-    <div id="gameInfoContainer" style="display: none;">
+    <div id="gameInfoContainer" class="hidden">
 
         <h3 id="gameInfo">Game Information:</h3>
 
         <div id="portalDescription">
-            The objective of the game is<br>to get to the purple portal<br>doing so means you have<br>beaten the level.
+            You are the blue square at<br>
+            the bottom of the level.<br>
+            The objective of the game is<br>
+            to get to the purple portal,<br>
+            doing so means you have<br>
+            beaten the level.<br>
+            To control the player use either<br>
+            WASD or the the arrow keys. 
         </div>
 
         <img id="jumpBoostImg" src="jump_boost.png" alt="speed_boostImg">
@@ -46,8 +51,10 @@
             The kiwi spirit allows you to<br>harness the power of picking up<br>power ups, you need to collect it<br>before you can pick up<br>any other power ups.<br><br>
             Important to know:<br><br>
             You keep the buff of the power ups<br>for the entirity of the level.<br><br>
-            You lose everything when restarting<br> the level by reloading<br>or pressing restart.
+            You lose all the buffs the<br>player has and you are put<br>back to where the player origanlly<br>was at the start of the level if<br>you press the restart button.
         </div>
     </div>
+        
+    <script src="game.js"></script>
 </body>
 </html>
